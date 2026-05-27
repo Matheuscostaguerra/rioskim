@@ -9,8 +9,56 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SpotsRouteImport } from './routes/spots'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RidersRouteImport } from './routes/riders'
+import { Route as LojaRouteImport } from './routes/loja'
+import { Route as GaleriaRouteImport } from './routes/galeria'
+import { Route as ForecastRouteImport } from './routes/forecast'
+import { Route as EventosRouteImport } from './routes/eventos'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SpotsRoute = SpotsRouteImport.update({
+  id: '/spots',
+  path: '/spots',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RidersRoute = RidersRouteImport.update({
+  id: '/riders',
+  path: '/riders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LojaRoute = LojaRouteImport.update({
+  id: '/loja',
+  path: '/loja',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GaleriaRoute = GaleriaRouteImport.update({
+  id: '/galeria',
+  path: '/galeria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForecastRoute = ForecastRouteImport.update({
+  id: '/forecast',
+  path: '/forecast',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventosRoute = EventosRouteImport.update({
+  id: '/eventos',
+  path: '/eventos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +67,144 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/eventos': typeof EventosRoute
+  '/forecast': typeof ForecastRoute
+  '/galeria': typeof GaleriaRoute
+  '/loja': typeof LojaRoute
+  '/riders': typeof RidersRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/spots': typeof SpotsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/eventos': typeof EventosRoute
+  '/forecast': typeof ForecastRoute
+  '/galeria': typeof GaleriaRoute
+  '/loja': typeof LojaRoute
+  '/riders': typeof RidersRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/spots': typeof SpotsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/eventos': typeof EventosRoute
+  '/forecast': typeof ForecastRoute
+  '/galeria': typeof GaleriaRoute
+  '/loja': typeof LojaRoute
+  '/riders': typeof RidersRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/spots': typeof SpotsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/blog'
+    | '/eventos'
+    | '/forecast'
+    | '/galeria'
+    | '/loja'
+    | '/riders'
+    | '/sitemap.xml'
+    | '/spots'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/blog'
+    | '/eventos'
+    | '/forecast'
+    | '/galeria'
+    | '/loja'
+    | '/riders'
+    | '/sitemap.xml'
+    | '/spots'
+  id:
+    | '__root__'
+    | '/'
+    | '/blog'
+    | '/eventos'
+    | '/forecast'
+    | '/galeria'
+    | '/loja'
+    | '/riders'
+    | '/sitemap.xml'
+    | '/spots'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogRoute: typeof BlogRoute
+  EventosRoute: typeof EventosRoute
+  ForecastRoute: typeof ForecastRoute
+  GaleriaRoute: typeof GaleriaRoute
+  LojaRoute: typeof LojaRoute
+  RidersRoute: typeof RidersRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SpotsRoute: typeof SpotsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/spots': {
+      id: '/spots'
+      path: '/spots'
+      fullPath: '/spots'
+      preLoaderRoute: typeof SpotsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/riders': {
+      id: '/riders'
+      path: '/riders'
+      fullPath: '/riders'
+      preLoaderRoute: typeof RidersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/loja': {
+      id: '/loja'
+      path: '/loja'
+      fullPath: '/loja'
+      preLoaderRoute: typeof LojaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galeria': {
+      id: '/galeria'
+      path: '/galeria'
+      fullPath: '/galeria'
+      preLoaderRoute: typeof GaleriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forecast': {
+      id: '/forecast'
+      path: '/forecast'
+      fullPath: '/forecast'
+      preLoaderRoute: typeof ForecastRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/eventos': {
+      id: '/eventos'
+      path: '/eventos'
+      fullPath: '/eventos'
+      preLoaderRoute: typeof EventosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +217,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogRoute: BlogRoute,
+  EventosRoute: EventosRoute,
+  ForecastRoute: ForecastRoute,
+  GaleriaRoute: GaleriaRoute,
+  LojaRoute: LojaRoute,
+  RidersRoute: RidersRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SpotsRoute: SpotsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
