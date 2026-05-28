@@ -4,7 +4,7 @@ import spotRecreio from "@/assets/spot-recreio.jpg";
 import spotGrumari from "@/assets/spot-grumari.jpg";
 import news1 from "@/assets/news-1.jpg";
 import news2 from "@/assets/news-2.jpg";
-import news3 from "@/assets/news-3.jpg";
+import elReyCover from "@/assets/el-rey-cover.jpg";
 import rider1 from "@/assets/rider-1.jpg";
 import rider2 from "@/assets/rider-2.jpg";
 import rider3 from "@/assets/rider-3.jpg";
@@ -13,7 +13,7 @@ import rider4 from "@/assets/rider-4.jpg";
 export const IMAGES = {
   hero: heroSkim,
   spots: { barra: spotBarra, recreio: spotRecreio, grumari: spotGrumari },
-  news: [news1, news2, news3],
+  news: [news1, news2, elReyCover],
   riders: [rider1, rider2, rider3, rider4],
 };
 
@@ -69,11 +69,11 @@ export const NEWS = [
   },
   {
     id: "3",
-    image: news3,
-    title: "Pedro Sales fatura o Rio Skim Pro 2025",
+    image: elReyCover,
+    title: "El Rey de Lovers 2026: os melhores momentos do México",
     tag: "Campeonato" as const,
     excerpt:
-      "Em uma final disputada nas séries finais do dia, Sales garantiu o título com uma manobra de assinatura.",
+      "Cabo San Lucas recebeu os melhores do mundo. Veja como foi o evento que abriu a temporada internacional.",
   },
 ];
 
