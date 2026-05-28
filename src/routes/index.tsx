@@ -50,7 +50,7 @@ function Index() {
             <span className="text-[var(--color-coral)]">do Rio.</span>
           </h1>
           <p className="mt-6 max-w-xl text-base md:text-lg text-muted-foreground">
-            Reports da areia, perfis de quem rasga, calendário de campeonato
+            Reports da areia, a galera que skia, calendário de campeonato 
             e o forecast que importa. Sem firula.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
