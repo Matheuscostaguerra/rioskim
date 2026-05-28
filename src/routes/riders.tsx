@@ -42,6 +42,7 @@ function RidersPage() {
           spots={["Leblon", "Vidigal"]}
           hobbies={["Moto", "Frescobol"]}
           about="Skimboarder há mais de 20 anos, formado em Educação Física pela UFRJ, personal trainer e colaborador do RioSkim desde a fundação."
+          instagram="https://www.instagram.com/sergiobaiapersonal/"
         />
       </section>
 

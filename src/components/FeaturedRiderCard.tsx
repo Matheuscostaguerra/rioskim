@@ -1,3 +1,5 @@
+import { Instagram } from "lucide-react";
+
 type Props = {
   image: string;
   name: string;
@@ -7,9 +9,10 @@ type Props = {
   spots: string[];
   hobbies: string[];
   about: string;
+  instagram?: string;
 };
 
-export function FeaturedRiderCard({ image, name, category, age, stance, spots, hobbies, about }: Props) {
+export function FeaturedRiderCard({ image, name, category, age, stance, spots, hobbies, about, instagram }: Props) {
   return (
     <article className="group grid md:grid-cols-[1.1fr_1.4fr] gap-0 border border-border bg-card/40 overflow-hidden max-w-5xl mx-auto">
       <div className="relative aspect-[4/5] md:aspect-auto overflow-hidden bg-card">
@@ -30,6 +33,17 @@ export function FeaturedRiderCard({ image, name, category, age, stance, spots, h
           Atleta RioSkim
         </div>
         <h2 className="text-display text-5xl md:text-7xl leading-[0.9]">{name}</h2>
+        {instagram && (
+          <a
+            href={instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-[var(--color-coral)] transition-colors"
+          >
+            <Instagram size={16} />
+            <span>@{instagram.replace(/^https?:\/\/(www\.)?instagram\.com\//, "").replace(/\/$/, "")}</span>
+          </a>
+        )}
 
         <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-border pt-6">
           <Info label="Idade" value={`${age} anos`} />
