@@ -62,10 +62,10 @@ export const NEWS = [
   {
     id: "2",
     image: news2,
-    title: "A nova geração que mora no chão da Barra",
+    title: "Projeto Tradição Skimboard: transformando vidas em Mangaratiba",
     tag: "Comunidade" as const,
     excerpt:
-      "Eles têm entre 14 e 19 anos, andam todo dia depois da escola e estão redesenhando o que é possível no shorebreak.",
+      "Ailton Fernandes, precursor do skim em Ibicuí, lidera iniciativa que atende jovens de 8 a 18 anos e sonha em transformar Mangaratiba numa meca do skimboard.",
   },
   {
     id: "3",
