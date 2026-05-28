@@ -4,21 +4,24 @@ import spotRecreio from "@/assets/spot-recreio.jpg";
 import spotGrumari from "@/assets/spot-grumari.jpg";
 import news1 from "@/assets/news-1.jpg";
 import news2 from "@/assets/news-2.jpg";
-import news3 from "@/assets/news-3.jpg"; // 👈 adicionado
-import projetoTradicaoCover from "@/assets/projeto-tradicao-cover.jpeg"; // 👈 adicionado (.jpeg!)
-import elReyCover from "@/assets/el-rey-cover.jpg";
+import news3 from "@/assets/news-3.jpg";
+import projetoTradicaoCover from "@/assets/projeto-tradicao-cover.jpeg";
+import elReyCover from "@/assets/el-rey-de-lovers-cover.jpg";
+import skimForecastCover from "@/assets/skim-forecast-cover.jpeg"; // 👈 cola aqui, .jpeg!
 import rider1 from "@/assets/rider-1.jpg";
 import rider2 from "@/assets/rider-2.jpg";
 import rider3 from "@/assets/rider-3.jpg";
 import rider4 from "@/assets/rider-4.jpg";
 
 
+
 export const IMAGES = {
   hero: heroSkim,
   spots: { barra: spotBarra, recreio: spotRecreio, grumari: spotGrumari },
-  news: [news1, news2, news3, projetoTradicaoCover, elReyCover],
+  news: [news1, news2, news3, projetoTradicaoCover, elReyCover, skimForecastCover], // 👈
   riders: [rider1, rider2, rider3, rider4],
 };
+
 
 export const SPOTS = [
   {
@@ -55,13 +58,13 @@ export const SPOTS = [
 
 export const NEWS = [
   {
-    id: "1",
-    image: news1,
-    title: "Recreio amanheceu épico — e ninguém estava lá pra ver",
-    tag: "Forecast" as const,
-    excerpt:
-      "Swell de SE alinhado com vento terral por três horas. A janela perfeita que quase ninguém pegou.",
-  },
+  id: "1",
+  image: skimForecastCover, // 👈 sua logo ou imagem da ferramenta
+  title: "Skim Forecast: a primeira ferramenta de previsão feita para o skimboard",
+  tag: "Forecast" as const,
+  excerpt:
+    "Clique em qualquer ponto da costa mundial e veja a previsão exata para shore break. Algoritmos colaborativos, reports da comunidade e dados de bóias oceânicas — tudo num só lugar.",
+},
   {
     id: "2",
     image: projetoTradicaoCover, // 👈 trocou aqui
