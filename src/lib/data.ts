@@ -80,10 +80,41 @@ export const NEWS = [
 export const RIDERS: { name: string; spot: string; handle: string; image: string }[] = [];
 
 export type EventStatus = "concluido" | "em-breve";
+
 export const EVENTS: {
   date: string;
   title: string;
   location: string;
   status: EventStatus;
-}[] = [];
-
+}[] = [
+  {
+    date: "17-19 Abr",
+    title: "El Rey de Lovers",
+    location: "Cabo San Lucas, México",
+    status: "concluido",
+  },
+  {
+    date: "25-26 Jul",
+    title: "Internacional de Skimboard '26 at Santa Cruz Ocean Spirit",
+    location: "Santa Cruz, Portugal",
+    status: "em-breve",
+  },
+  {
+    date: "07-09 Ago",
+    title: "Zap World Championships of Skimboarding",
+    location: "Dewey Beach, DE",
+    status: "em-breve",
+  },
+  {
+    date: "22-23 Ago",
+    title: "The Vic",
+    location: "Laguna Beach, CA",
+    status: "em-breve",
+  },
+  {
+    date: "19-20 Set",
+    title: "Exile Oktoberfest",
+    location: "Newport Beach, CA",
+    status: "em-breve",
+  },
+];
