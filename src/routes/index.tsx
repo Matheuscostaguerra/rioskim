@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
-import { IMAGES, NEWS, RIDERS, SPOTS, EVENTS } from "@/lib/data";
+import { IMAGES, NEWS, SPOTS, EVENTS } from "@/lib/data";
 import { ForecastBar } from "@/components/ForecastBar";
 import { NewsCard } from "@/components/NewsCard";
-import { RiderCard } from "@/components/RiderCard";
 import { SpotCard } from "@/components/SpotCard";
+import sergioImg from "@/assets/rider-sergio.jpg";
+import sapoImg from "@/assets/rider-sapo.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
