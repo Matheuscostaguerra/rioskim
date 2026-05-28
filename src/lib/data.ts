@@ -6,7 +6,7 @@ import news1 from "@/assets/news-1.jpg";
 import news2 from "@/assets/news-2.jpg";
 import news3 from "@/assets/news-3.jpg"; // 👈 adicionado
 import projetoTradicaoCover from "@/assets/projeto-tradicao-cover.jpeg"; // 👈 adicionado (.jpeg!)
-import elReyCover from "@/assets/el-rey-cover.jpg";
+import elReyCover from "@/assets/el-rey-de-lovers-cover.jpg";
 import rider1 from "@/assets/rider-1.jpg";
 import rider2 from "@/assets/rider-2.jpg";
 import rider3 from "@/assets/rider-3.jpg";
