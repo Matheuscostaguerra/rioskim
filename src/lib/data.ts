@@ -77,30 +77,13 @@ export const NEWS = [
   },
 ];
 
-export const RIDERS = [
-  { name: "Pedro Sales", spot: "Recreio", handle: "@pedrosales", image: rider1 },
-  { name: "Ana Vidal", spot: "Barra", handle: "@anavidal", image: rider2 },
-  { name: "João Beltrão", spot: "Grumari", handle: "@jbeltrao", image: rider3 },
-  { name: "Tio Marcão", spot: "Recreio", handle: "@tiomarcao", image: rider4 },
-];
+export const RIDERS: { name: string; spot: string; handle: string; image: string }[] = [];
 
-export const EVENTS = [
-  {
-    date: "15 MAR",
-    title: "Rio Skim Pro — Etapa Recreio",
-    location: "Praia do Recreio, Posto 11",
-    tag: "Campeonato" as const,
-  },
-  {
-    date: "29 MAR",
-    title: "Skim Day Comunitário",
-    location: "Barra da Tijuca, Posto 5",
-    tag: "Comunidade" as const,
-  },
-  {
-    date: "12 ABR",
-    title: "Workshop — Iniciantes",
-    location: "Praia da Macumba",
-    tag: "Aula" as const,
-  },
-];
+export type EventStatus = "concluido" | "em-breve";
+export const EVENTS: {
+  date: string;
+  title: string;
+  location: string;
+  status: EventStatus;
+}[] = [];
+
