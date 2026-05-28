@@ -1,17 +1,18 @@
 import heroSkim from "@/assets/hero-skim.jpg";
 import spotBarra from "@/assets/spot-barra.jpg";
-import spotRecreio from "@/assets/spot-recreio.jpg";
+import spotReCreio from "@/assets/spot-recreio.jpg";
 import spotGrumari from "@/assets/spot-grumari.jpg";
 import news1 from "@/assets/news-1.jpg";
 import news2 from "@/assets/news-2.jpg";
 import news3 from "@/assets/news-3.jpg";
 import projetoTradicaoCover from "@/assets/projeto-tradicao-cover.jpeg";
 import elReyCover from "@/assets/el-rey-de-lovers-cover.jpg";
-import skimForecastCover from "@/assets/skim-forecast-cover.jpeg"; // 👈 cola aqui, .jpeg!
+import skimForecastCover from "@/assets/skim-forecast-cover.jpeg";
 import rider1 from "@/assets/rider-1.jpg";
 import rider2 from "@/assets/rider-2.jpg";
 import rider3 from "@/assets/rider-3.jpg";
 import rider4 from "@/assets/rider-4.jpg";
+
 
 
 
