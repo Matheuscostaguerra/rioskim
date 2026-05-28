@@ -104,9 +104,33 @@ function Index() {
               Todos os riders →
             </Link>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {RIDERS.map((r) => <RiderCard key={r.name} {...r} />)}
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            <Link to="/riders" className="group block border border-border overflow-hidden bg-background">
+              <div className="aspect-[4/5] overflow-hidden">
+                <img src={sergioImg} alt="Sergio Baia" className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              </div>
+              <div className="p-5">
+                <div className="tag-pill mb-2 text-[var(--color-coral)] border-[var(--color-coral)]">Master</div>
+                <div className="text-display text-2xl">Sergio Baia</div>
+                <div className="text-xs text-muted-foreground mt-1">Leblon · Vidigal</div>
+              </div>
+            </Link>
+            <Link to="/riders" className="group block border border-border overflow-hidden bg-background">
+              <div className="aspect-[4/5] overflow-hidden">
+                <img src={sapoImg} alt="Thiago Sapo" className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              </div>
+              <div className="p-5">
+                <div className="tag-pill mb-2 text-[var(--color-coral)] border-[var(--color-coral)]">Master</div>
+                <div className="text-display text-2xl">
+                  Thiago <span className="text-[var(--color-coral)]">"Sapo"</span> da Cruz Soares
+                </div>
+                <div className="text-xs text-muted-foreground mt-1">Costa Verde · Jacareí · Sununguinha</div>
+              </div>
+            </Link>
           </div>
+          <p className="mt-8 text-xs text-muted-foreground uppercase tracking-[0.2em] text-center">
+            Mais riders em breve. É rider do Rio? Manda seus dados pra gente.
+          </p>
         </div>
       </section>
 
@@ -115,30 +139,48 @@ function Index() {
         <div className="grid md:grid-cols-[1fr_2fr] gap-12 md:gap-20">
           <div>
             <div className="tag-pill mb-3">Calendário</div>
-            <h2 className="text-display text-4xl md:text-6xl mb-6">Próximos eventos</h2>
+            <h2 className="text-display text-4xl md:text-6xl mb-6">Mundial de Skimboard</h2>
             <p className="text-sm text-muted-foreground max-w-xs">
-              Etapas, encontros e workshops. Aparece, anda, vive.
+              Etapas oficiais do tour mundial e encontros da comunidade.
             </p>
             <Link to="/eventos" className="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[var(--color-coral)]">
               Calendário completo <ArrowRight size={12} />
             </Link>
           </div>
-          <div className="divide-y divide-border border-y border-border">
-            {EVENTS.map((e) => (
-              <div key={e.title} className="py-6 flex items-center gap-6 group cursor-pointer">
-                <div className="text-display text-3xl md:text-4xl w-24 text-[var(--color-coral)]">{e.date}</div>
-                <div className="flex-1">
-                  <div className="text-display text-xl md:text-2xl group-hover:text-[var(--color-coral)] transition-colors">{e.title}</div>
-                  <div className="text-xs text-muted-foreground mt-1 flex items-center gap-1.5">
-                    <MapPin size={12} /> {e.location}
-                  </div>
-                </div>
-                <span className="tag-pill hidden sm:inline-flex">{e.tag}</span>
+          {EVENTS.length === 0 ? (
+            <div className="border border-border p-10 flex flex-col justify-center">
+              <div className="tag-pill mb-4 self-start">Em atualização</div>
+              <div className="text-display text-2xl md:text-3xl">
+                Calendário do Mundial em atualização.
               </div>
-            ))}
-          </div>
+              <p className="mt-3 text-sm text-muted-foreground max-w-md">
+                As datas oficiais das próximas etapas serão divulgadas em breve.
+              </p>
+            </div>
+          ) : (
+            <div className="divide-y divide-border border-y border-border">
+              {EVENTS.map((e) => {
+                const done = e.status === "concluido";
+                return (
+                  <div key={e.title} className={`py-6 flex items-center gap-6 group ${done ? "opacity-50" : ""}`}>
+                    <div className={`text-display text-3xl md:text-4xl w-24 ${done ? "text-muted-foreground" : "text-[var(--color-coral)]"}`}>{e.date}</div>
+                    <div className="flex-1">
+                      <div className="text-display text-xl md:text-2xl group-hover:text-[var(--color-coral)] transition-colors">{e.title}</div>
+                      <div className="text-xs text-muted-foreground mt-1 flex items-center gap-1.5">
+                        <MapPin size={12} /> {e.location}
+                      </div>
+                    </div>
+                    <span className={`tag-pill hidden sm:inline-flex ${done ? "" : "text-[var(--color-coral)] border-[var(--color-coral)]"}`}>
+                      {done ? "Concluído" : "Em breve"}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </section>
+
 
       {/* SPOTS */}
       <section className="container-rio py-20 md:py-28">
