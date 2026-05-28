@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/PageHeader";
-import { RiderCard } from "@/components/RiderCard";
 import { FeaturedRiderCard } from "@/components/FeaturedRiderCard";
-import { RIDERS } from "@/lib/data";
 import sergioImg from "@/assets/rider-sergio.jpg";
 import sapoImg from "@/assets/rider-sapo.jpg";
 
@@ -20,7 +18,6 @@ export const Route = createFileRoute("/riders")({
 });
 
 function RidersPage() {
-  const all = [...RIDERS, ...RIDERS.map((r) => ({ ...r, name: r.name + " Jr." }))];
   return (
     <>
       <PageHeader
@@ -62,13 +59,14 @@ function RidersPage() {
             ]}
           />
         </div>
-      </section>
 
-      <section className="container-rio pb-16 md:pb-24">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
-          {all.map((r, i) => <RiderCard key={i} {...r} />)}
+        <div className="mt-16 md:mt-20 border border-border py-10 px-6 text-center">
+          <p className="text-sm text-muted-foreground max-w-md mx-auto">
+            Mais riders em breve. É rider do Rio? Manda seus dados pra gente.
+          </p>
         </div>
       </section>
     </>
   );
 }
+
