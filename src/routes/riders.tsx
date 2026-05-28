@@ -4,6 +4,7 @@ import { RiderCard } from "@/components/RiderCard";
 import { FeaturedRiderCard } from "@/components/FeaturedRiderCard";
 import { RIDERS } from "@/lib/data";
 import sergioImg from "@/assets/rider-sergio.jpg";
+import sapoImg from "@/assets/rider-sapo.jpg";
 
 export const Route = createFileRoute("/riders")({
   head: () => ({
@@ -31,19 +32,36 @@ function RidersPage() {
       <section className="container-rio py-16 md:py-24">
         <div className="mb-10 md:mb-14">
           <div className="tag-pill mb-3 text-[var(--color-coral)] border-[var(--color-coral)]">Destaque</div>
-          <h2 className="text-display text-3xl md:text-5xl">Atleta em foco</h2>
+          <h2 className="text-display text-3xl md:text-5xl">Atletas em foco</h2>
         </div>
-        <FeaturedRiderCard
-          image={sergioImg}
-          name="Sergio Baia"
-          category="Master"
-          age={49}
-          stance="Regular"
-          spots={["Leblon", "Vidigal"]}
-          hobbies={["Moto", "Frescobol"]}
-          about="Skimboarder há mais de 20 anos, formado em Educação Física pela UFRJ, personal trainer e colaborador do RioSkim desde a fundação."
-          instagram="https://www.instagram.com/sergiobaiapersonal/"
-        />
+        <div className="space-y-10 md:space-y-14">
+          <FeaturedRiderCard
+            image={sergioImg}
+            name="Sergio Baia"
+            category="Master"
+            instagram="https://www.instagram.com/sergiobaiapersonal/"
+            info={[
+              { label: "Idade", value: "49 anos" },
+              { label: "Base", value: "Regular" },
+              { label: "Praias", value: "Leblon · Vidigal" },
+              { label: "Hobbies", value: "Moto · Frescobol" },
+            ]}
+            about="Skimboarder há mais de 20 anos, formado em Educação Física pela UFRJ, personal trainer e colaborador do RioSkim desde a fundação."
+          />
+          <FeaturedRiderCard
+            image={sapoImg}
+            name="Thiago da Cruz Soares"
+            nickname="Sapo"
+            category="Master"
+            instagram="https://www.instagram.com/thiagosaposkim/"
+            info={[
+              { label: "Base", value: "Regular" },
+              { label: "Região", value: "Costa Verde" },
+              { label: "Picos na região", value: "Jacareí · Sununguinha" },
+              { label: "Picos no Brasil", value: "Sununga · São Conrado · Raladinho" },
+            ]}
+          />
+        </div>
       </section>
 
       <section className="container-rio pb-16 md:pb-24">
