@@ -1,18 +1,18 @@
 import { Instagram } from "lucide-react";
 
+type InfoItem = { label: string; value: string };
+
 type Props = {
   image: string;
   name: string;
+  nickname?: string;
   category: string;
-  age: number;
-  stance: string;
-  spots: string[];
-  hobbies: string[];
-  about: string;
   instagram?: string;
+  info: InfoItem[];
+  about?: string;
 };
 
-export function FeaturedRiderCard({ image, name, category, age, stance, spots, hobbies, about, instagram }: Props) {
+export function FeaturedRiderCard({ image, name, nickname, category, instagram, info, about }: Props) {
   return (
     <article className="group grid md:grid-cols-[1.1fr_1.4fr] gap-0 border border-border bg-card/40 overflow-hidden max-w-5xl mx-auto">
       <div className="relative aspect-[4/5] md:aspect-auto overflow-hidden bg-card">
@@ -33,6 +33,11 @@ export function FeaturedRiderCard({ image, name, category, age, stance, spots, h
           Atleta RioSkim
         </div>
         <h2 className="text-display text-5xl md:text-7xl leading-[0.9]">{name}</h2>
+        {nickname && (
+          <div className="mt-2 text-display text-2xl md:text-3xl text-[var(--color-coral)]">
+            "{nickname}"
+          </div>
+        )}
         {instagram && (
           <a
             href={instagram}
@@ -46,16 +51,17 @@ export function FeaturedRiderCard({ image, name, category, age, stance, spots, h
         )}
 
         <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-border pt-6">
-          <Info label="Idade" value={`${age} anos`} />
-          <Info label="Base" value={stance} />
-          <Info label="Praias" value={spots.join(" · ")} />
-          <Info label="Hobbies" value={hobbies.join(" · ")} />
+          {info.map((item) => (
+            <Info key={item.label} label={item.label} value={item.value} />
+          ))}
         </dl>
 
-        <div className="mt-8 border-t border-border pt-6">
-          <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Sobre</div>
-          <p className="text-sm md:text-base leading-relaxed text-foreground/90">{about}</p>
-        </div>
+        {about && (
+          <div className="mt-8 border-t border-border pt-6">
+            <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Sobre</div>
+            <p className="text-sm md:text-base leading-relaxed text-foreground/90">{about}</p>
+          </div>
+        )}
       </div>
     </article>
   );
