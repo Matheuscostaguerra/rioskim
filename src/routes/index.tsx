@@ -24,13 +24,18 @@ function Index() {
     <>
       {/* HERO */}
       <section className="relative h-[92vh] min-h-[600px] w-full overflow-hidden">
-        <img
-          src={IMAGES.hero}
-          alt="Skimboarder na praia do Rio"
-          width={1920}
-          height={1280}
+        <video
+          src="/hero.mp4"
+          poster={IMAGES.hero}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-label="Skimboarder na praia do Rio"
           className="absolute inset-0 h-full w-full object-cover"
         />
+        <div className="absolute inset-0 bg-black/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/40" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-transparent" />
         <div className="relative container-rio h-full flex flex-col justify-end pb-16 md:pb-24">
