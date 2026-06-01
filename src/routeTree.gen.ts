@@ -18,6 +18,7 @@ import { Route as ForecastRouteImport } from './routes/forecast'
 import { Route as EventosRouteImport } from './routes/eventos'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const SpotsRoute = SpotsRouteImport.update({
   id: '/spots',
@@ -64,10 +65,15 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/eventos': typeof EventosRoute
   '/forecast': typeof ForecastRoute
   '/galeria': typeof GaleriaRoute
@@ -75,10 +81,11 @@ export interface FileRoutesByFullPath {
   '/riders': typeof RidersRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/spots': typeof SpotsRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/eventos': typeof EventosRoute
   '/forecast': typeof ForecastRoute
   '/galeria': typeof GaleriaRoute
@@ -86,11 +93,12 @@ export interface FileRoutesByTo {
   '/riders': typeof RidersRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/spots': typeof SpotsRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/eventos': typeof EventosRoute
   '/forecast': typeof ForecastRoute
   '/galeria': typeof GaleriaRoute
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/riders': typeof RidersRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/spots': typeof SpotsRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/riders'
     | '/sitemap.xml'
     | '/spots'
+    | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/riders'
     | '/sitemap.xml'
     | '/spots'
+    | '/blog/$slug'
   id:
     | '__root__'
     | '/'
@@ -133,11 +144,12 @@ export interface FileRouteTypes {
     | '/riders'
     | '/sitemap.xml'
     | '/spots'
+    | '/blog/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BlogRoute: typeof BlogRoute
+  BlogRoute: typeof BlogRouteWithChildren
   EventosRoute: typeof EventosRoute
   ForecastRoute: typeof ForecastRoute
   GaleriaRoute: typeof GaleriaRoute
@@ -212,12 +224,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
   }
 }
 
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BlogRoute: BlogRoute,
+  BlogRoute: BlogRouteWithChildren,
   EventosRoute: EventosRoute,
   ForecastRoute: ForecastRoute,
   GaleriaRoute: GaleriaRoute,

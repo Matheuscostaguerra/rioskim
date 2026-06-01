@@ -23,7 +23,7 @@ function BlogPage() {
       <PageHeader eyebrow="Notícias" title="Reports da areia." subtitle="Campeonato, comunidade, cultura e condição. Sem encheção." />
       <section className="container-rio py-16 md:py-24">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
-          {all.map((n, i) => <NewsCard key={i} {...n} />)}
+          {NEWS.map((n) => <NewsCard key={n.id} {...n} slug={n.slug} />)}
         </div>
       </section>
     </>

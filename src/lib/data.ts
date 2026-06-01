@@ -1,6 +1,6 @@
 import heroSkim from "@/assets/hero-skim.jpg";
 import spotBarra from "@/assets/spot-barra.jpg";
-import spotReCreio from "@/assets/spot-recreio.jpg";
+import spotRecreio from "@/assets/spot-recreio.jpg";
 import spotGrumari from "@/assets/spot-grumari.jpg";
 import news1 from "@/assets/news-1.jpg";
 import news2 from "@/assets/news-2.jpg";
