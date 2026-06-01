@@ -30,7 +30,7 @@ export function FeaturedRiderCard({ image, name, nickname, category, instagram, 
 
       <div className="p-8 md:p-10 flex flex-col">
         <div className="text-xs uppercase tracking-[0.25em] text-[var(--color-coral)] mb-3">
-          Atleta RioSkim
+          Atleta 
         </div>
         <h2 className="text-display text-5xl md:text-7xl leading-[0.9]">{name}</h2>
         {nickname && (

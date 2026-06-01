@@ -207,8 +207,8 @@ function Index() {
             Ferramenta
           </div>
           <h2 className="text-display text-5xl md:text-8xl max-w-4xl mx-auto leading-[0.95]">
-            Vai andar hoje?<br />
-            <span className="text-muted-foreground">Vê as condições.</span>
+            Vai skiar hoje?<br />
+            <span className="text-muted-foreground">Check nas condições.</span>
           </h2>
           <a
             href="https://skimforecast.com"
@@ -219,7 +219,7 @@ function Index() {
             skimforecast.com <ArrowRight size={16} />
           </a>
           <p className="mt-6 text-xs text-muted-foreground uppercase tracking-[0.2em]">
-            Previsão de skim · grátis · feito por skimer
+            Previsão de skim · grátis · feito por quem skia
           </p>
         </div>
       </section>

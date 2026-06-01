@@ -1,12 +1,13 @@
 import heroSkim from "@/assets/hero-skim.jpg";
-import spotBarra from "@/assets/spot-barra.jpg";
-import spotRecreio from "@/assets/spot-recreio.jpg";
-import spotGrumari from "@/assets/spot-grumari.jpg";
 import projetoTradicaoCover from "@/assets/projeto-tradicao-cover.jpeg";
 import elReyCover from "@/assets/el-rey-de-lovers-cover.jpg";
 import skimForecastCover from "@/assets/skim-forecast-cover.jpeg";
 import riderSapo from "@/assets/rider-sapo.jpg";
 import riderSergio from "@/assets/rider-sergio.jpg";
+import spotMacumba from "@/assets/macumba.jpg";
+import spotVidigal from "@/assets/vidigal.jpeg";
+import spotItacoatiara from "@/assets/itacoatiara.jpg";
+
 
 
 // 👇 Importe as fotos do Leo e da Julia
@@ -15,43 +16,48 @@ import juliaDias from "@/assets/julia-dias-el-rey-2026.jpg";
 
 export const IMAGES = {
   hero: heroSkim,
-  spots: { barra: spotBarra, recreio: spotRecreio, grumari: spotGrumari },
+  spots: {
+    macumba: spotMacumba,
+    vidigal: spotVidigal,
+    itacoatiara: spotItacoatiara,
+  },
   news: [projetoTradicaoCover, elReyCover, skimForecastCover],
-  riders: [riderSapo, riderSergio], // 👈 linha nova
+  riders: [riderSapo, riderSergio],
 };
 
 export const SPOTS = [
   {
-    slug: "barra",
-    name: "Barra da Tijuca",
-    zone: "Zona Oeste",
-    image: spotBarra,
+    slug: "macumba",
+    name: "Macumba",
+    zone: "Zona Sudoeste",
+    image: spotMacumba,
     difficulty: "Intermediário" as const,
-    bottom: "Areia fina, banco aberto",
+    bottom: "Areia, fundo de praia",
     description:
-      "O ponto de encontro. Praia longa, fácil acesso, ondas constantes pra quem tá começando ou treinando manobra.",
+      "O spot mais consistente do Rio para o skim. Shorebreak com ondas que quebram direto na beira — o meio da praia é o pico. Já recebeu o King of Skim e atrai skimmers de todo o país.",
   },
   {
-    slug: "recreio",
-    name: "Recreio",
-    zone: "Zona Oeste",
-    image: spotRecreio,
-    difficulty: "Avançado" as const,
-    bottom: "Banco fundo, shorebreak pesado",
+    slug: "vidigal",
+    name: "Praia do Vidigal",
+    zone: "Zona Sul",
+    image: spotVidigal,
+    difficulty: "Todos os níveis" as const,
+    bottom: "Areia com muita pedra — exige atenção",
     description:
-      "O templo. Shorebreak rápido e poderoso. Aqui o nível sobe — e o respeito pela onda também.",
+      "Pico constante com opções para todos os níveis. No canto esquerdo, quando a areia aparece e a ondulação está certa, rola a lateral — onda que bate na pedra e volta conectando em outra, uma das melhores do Rio. O pedrão no meio é para os avançados, e perto da escada o mar é mais tranquilo para quem está aprendendo. O fundo misto de areia e pedra eleva o risco e exige respeito.",
   },
   {
-    slug: "grumari",
-    name: "Grumari",
-    zone: "Zona Oeste",
-    image: spotGrumari,
+    slug: "itacoatiara",
+    name: "Itacoatiara",
+    zone: "Niterói",
+    image: spotItacoatiara,
     difficulty: "Avançado" as const,
-    bottom: "Pedra e areia, fundo variável",
+    bottom: "Areia, fundo de praia",
     description:
-      "Selvagem, isolada, sem estrutura. Quando quebra, é pra poucos. Vai cedo, vai sóbrio, vai com respeito.",
+      "Clássico quando rola para o skimboard. Ondas pesadas na beira, praia linda e pico feito para o surf de verdade. Com swell forte fica gigante — espetáculo para quem gosta de assistir surfistas de onda grande no tow-in. Quando as condições alinham, é experiência de outro nível.",
   },
 ];
+
 
 export const NEWS = [
   {

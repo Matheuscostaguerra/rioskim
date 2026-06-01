@@ -31,9 +31,9 @@ export function Footer() {
         <div className="space-y-4">
           <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Encontre a gente</div>
           <div className="flex gap-3">
-            <a href="#" className="p-2 border border-border hover:border-[var(--color-coral)] hover:text-[var(--color-coral)] transition-colors"><Instagram size={18} /></a>
-            <a href="#" className="p-2 border border-border hover:border-[var(--color-coral)] hover:text-[var(--color-coral)] transition-colors"><Youtube size={18} /></a>
-            <a href="#" className="p-2 border border-border hover:border-[var(--color-coral)] hover:text-[var(--color-coral)] transition-colors"><Mail size={18} /></a>
+            <a href="https://www.instagram.com/rioskimboard" target="_blank" rel="noreferrer" className="p-2 border border-border hover:border-[var(--color-coral)] hover:text-[var(--color-coral)] transition-colors"><Instagram size={18} /></a>
+            <a href="https://www.youtube.com/@rioskimskimboard2411" target="_blank" rel="noreferrer" className="p-2 border border-border hover:border-[var(--color-coral)] hover:text-[var(--color-coral)] transition-colors"><Youtube size={18} /></a>
+            <a href="mailto:contato.rioskim@gmail.com" className="p-2 border border-border hover:border-[var(--color-coral)] hover:text-[var(--color-coral)] transition-colors"><Mail size={18} /></a>
           </div>
         </div>
       </div>
