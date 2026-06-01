@@ -64,14 +64,37 @@ function BlogPostPage() {
         </p>
       )}
       {post.content && (
-        <div className="prose prose-invert max-w-3xl mt-10 md:mt-14">
-          {post.content.split('\n\n').map((paragraph: string, i: number) => (
-            <p key={i} className="text-base leading-relaxed text-foreground/90">
-              {paragraph}
-            </p>
-          ))}
-        </div>
-      )}
+  <div className="prose prose-invert max-w-3xl mt-10 md:mt-14">
+    {post.content.split('\n\n').map((paragraph: string, i: number) => {
+      const imageMatch = paragraph.trim().match(/^\[IMAGE:(.+)\]$/);
+
+      if (imageMatch) {
+        const key = imageMatch[1];
+        const src = (post.images as Record<string, string> | undefined)?.[key];
+
+        if (!src) return null;
+
+        return (
+          <figure key={i} className="my-8 not-prose">
+            <div className="relative overflow-hidden">
+              <img
+                src={src}
+                alt={key}
+                className="w-full object-cover"
+              />
+            </div>
+          </figure>
+        );
+      }
+
+      return (
+        <p key={i} className="text-base leading-relaxed text-foreground/90">
+          {paragraph}
+        </p>
+      );
+    })}
+  </div>
+)}
     </article>
   );
 }

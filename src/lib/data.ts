@@ -13,16 +13,16 @@ import rider2 from "@/assets/rider-2.jpg";
 import rider3 from "@/assets/rider-3.jpg";
 import rider4 from "@/assets/rider-4.jpg";
 
-
-
+// 👇 Importe as fotos do Leo e da Julia
+import leoFreitas from "@/assets/leo-freitas-el-rey-2026.png";
+import juliaDias from "@/assets/julia-dias-el-rey-2026.jpg";
 
 export const IMAGES = {
   hero: heroSkim,
   spots: { barra: spotBarra, recreio: spotRecreio, grumari: spotGrumari },
-  news: [news1, news2, news3, projetoTradicaoCover, elReyCover, skimForecastCover], // 👈
+  news: [news1, news2, news3, projetoTradicaoCover, elReyCover, skimForecastCover],
   riders: [rider1, rider2, rider3, rider4],
 };
-
 
 export const SPOTS = [
   {
@@ -110,13 +110,22 @@ O projeto funciona 2 a 3 vezes por semana na Praia de Ibicuí, com capacidade pa
     tag: "Campeonato" as const,
     excerpt:
       "Cabo San Lucas recebeu os melhores do mundo. Veja como foi o evento que abriu a temporada internacional.",
-    content: `Leo Freitas é o melhor brasileiro no El Rey de Lovers
+    // 👇 Imagens inline referenciadas pelos marcadores no content
+    images: {
+      leo: leoFreitas,
+      julia: juliaDias,
+    },
+    content: `[IMAGE:leo]
+
+Leo Freitas é o melhor brasileiro no El Rey de Lovers
 
 Nas ondas pesadas de Cabo San Lucas, no México, Leo Freitas entregou uma das melhores atuações brasileiras da temporada. O carioca terminou em 4º lugar na etapa El Rey de Lovers — abertura do UST 2026 — superando um field de 31 atletas e ficando à frente dos compatriotas João Lucas, Daniel Azevedo e Pedro Lima.
 
 O pódio ficou com Gerado Valencia (🥇 México), Chad Wadsworth (🥈 EUA) e Yahir Valencia (🥉 México). Mas o resultado de Leo tem um peso especial: sem um título UST na carreira, ele inicia 2026 ocupando o 4º lugar no ranking mundial — o brasileiro mais pontuado da temporada. A corrida pelo título começou. Bora, Leo! 🇧🇷🌊
 
 Data: 17–19 de abril de 2026 · Local: Cabo San Lucas, México
+
+[IMAGE:julia]
 
 Julia Dias vence a abertura do UST 2026 — Campeã em Cabo San Lucas!
 
@@ -127,8 +136,10 @@ Com drop afiado, leitura de onda milimétrica e wraps precisos, Julia superou Is
 A vitória não é só um resultado — é uma declaração. Julia Dias começa 2026 no topo do ranking e já está na corrida pelo título profissional feminino. Parabéns, Julia! 🇧🇷🌊🔥
 
 Data: 17–19 de abril de 2026 · Local: Cabo San Lucas, México`,
-  },
+},
 ];
+
+
 export const RIDERS: { name: string; spot: string; handle: string; image: string }[] = [];
 
 export type EventStatus = "concluido" | "em-breve";
