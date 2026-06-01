@@ -60,7 +60,8 @@ export const SPOTS = [
 export const NEWS = [
   {
   id: "1",
-  image: skimForecastCover, // 👈 sua logo ou imagem da ferramenta
+  slug: "skim-forecast",
+  image: skimForecastCover,
   title: "Skim Forecast: a primeira ferramenta de previsão feita para o skimboard",
   tag: "Forecast" as const,
   excerpt:
@@ -68,7 +69,8 @@ export const NEWS = [
 },
   {
     id: "2",
-    image: projetoTradicaoCover, // 👈 trocou aqui
+    slug: "projeto-tradicao",
+    image: projetoTradicaoCover,
     title: "Projeto Tradição Skimboard: transformando vidas em Mangaratiba",
     tag: "Comunidade" as const,
     excerpt:
@@ -76,6 +78,7 @@ export const NEWS = [
   },
   {
     id: "3",
+    slug: "el-rey-de-lovers-2026",
     image: elReyCover,
     title: "El Rey de Lovers 2026: os melhores momentos do México",
     tag: "Campeonato" as const,
