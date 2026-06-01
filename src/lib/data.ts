@@ -2,16 +2,9 @@ import heroSkim from "@/assets/hero-skim.jpg";
 import spotBarra from "@/assets/spot-barra.jpg";
 import spotRecreio from "@/assets/spot-recreio.jpg";
 import spotGrumari from "@/assets/spot-grumari.jpg";
-import news1 from "@/assets/news-1.jpg";
-import news2 from "@/assets/news-2.jpg";
-import news3 from "@/assets/news-3.jpg";
 import projetoTradicaoCover from "@/assets/projeto-tradicao-cover.jpeg";
 import elReyCover from "@/assets/el-rey-de-lovers-cover.jpg";
 import skimForecastCover from "@/assets/skim-forecast-cover.jpeg";
-import rider1 from "@/assets/rider-1.jpg";
-import rider2 from "@/assets/rider-2.jpg";
-import rider3 from "@/assets/rider-3.jpg";
-import rider4 from "@/assets/rider-4.jpg";
 
 // 👇 Importe as fotos do Leo e da Julia
 import leoFreitas from "@/assets/leo-freitas-el-rey-2026.png";
@@ -20,8 +13,7 @@ import juliaDias from "@/assets/julia-dias-el-rey-2026.jpg";
 export const IMAGES = {
   hero: heroSkim,
   spots: { barra: spotBarra, recreio: spotRecreio, grumari: spotGrumari },
-  news: [news1, news2, news3, projetoTradicaoCover, elReyCover, skimForecastCover],
-  riders: [rider1, rider2, rider3, rider4],
+  news: [projetoTradicaoCover, elReyCover, skimForecastCover]
 };
 
 export const SPOTS = [
