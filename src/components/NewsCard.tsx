@@ -1,13 +1,16 @@
+import { Link } from "@tanstack/react-router";
+
 type Props = {
   image: string;
   title: string;
   tag: "Campeonato" | "Comunidade" | "Forecast" | "Cultura";
   excerpt?: string;
   size?: "lg" | "md";
+  slug?: string;
 };
 
-export function NewsCard({ image, title, tag, excerpt, size = "md" }: Props) {
-  return (
+export function NewsCard({ image, title, tag, excerpt, size = "md", slug }: Props) {
+  const content = (
     <article className="group cursor-pointer">
       <div className={`relative overflow-hidden bg-card mb-4 ${size === "lg" ? "aspect-[16/10]" : "aspect-[4/3]"}`}>
         <img
@@ -28,4 +31,13 @@ export function NewsCard({ image, title, tag, excerpt, size = "md" }: Props) {
       )}
     </article>
   );
+
+  if (slug) {
+    return (
+      <Link to="/blog/$slug" params={{ slug }} className="block">
+        {content}
+      </Link>
+    );
+  }
+  return content;
 }
