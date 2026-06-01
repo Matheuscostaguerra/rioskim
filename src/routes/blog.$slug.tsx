@@ -63,6 +63,15 @@ function BlogPostPage() {
           {post.excerpt}
         </p>
       )}
+      {post.content && (
+        <div className="prose prose-invert max-w-3xl mt-10 md:mt-14">
+          {post.content.split('\n\n').map((paragraph: string, i: number) => (
+            <p key={i} className="text-base leading-relaxed text-foreground/90">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      )}
     </article>
   );
 }
