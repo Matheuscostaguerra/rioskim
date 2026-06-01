@@ -16,20 +16,19 @@ export const Route = createFileRoute("/galeria")({
 });
 
 function GalleryPage() {
-  const pool = [
-    IMAGES.hero,
-    IMAGES.news[0],
-    IMAGES.spots.recreio,
-    IMAGES.riders[0],
-    IMAGES.news[1],
-    IMAGES.spots.barra,
-    IMAGES.riders[1],
-    IMAGES.news[2],
-    IMAGES.spots.grumari,
-    IMAGES.riders[2],
-    IMAGES.riders[3],
-    IMAGES.hero,
-  ];
+const pool = [
+  IMAGES.hero,
+  IMAGES.news[0],
+  IMAGES.spots.recreio,
+  IMAGES.riders[0],       // Sapo
+  IMAGES.news[1],
+  IMAGES.spots.barra,
+  IMAGES.riders[1],       // Sergio
+  IMAGES.news[2],
+  IMAGES.spots.grumari,
+  IMAGES.hero,
+];
+
   return (
     <>
       <PageHeader eyebrow="Imagens" title="Areia, água, gente." subtitle="Cliques da comunidade. Mande os seus." />

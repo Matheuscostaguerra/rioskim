@@ -5,6 +5,9 @@ import spotGrumari from "@/assets/spot-grumari.jpg";
 import projetoTradicaoCover from "@/assets/projeto-tradicao-cover.jpeg";
 import elReyCover from "@/assets/el-rey-de-lovers-cover.jpg";
 import skimForecastCover from "@/assets/skim-forecast-cover.jpeg";
+import riderSapo from "@/assets/rider-sapo.jpg";
+import riderSergio from "@/assets/rider-sergio.jpg";
+
 
 // 👇 Importe as fotos do Leo e da Julia
 import leoFreitas from "@/assets/leo-freitas-el-rey-2026.png";
@@ -13,7 +16,8 @@ import juliaDias from "@/assets/julia-dias-el-rey-2026.jpg";
 export const IMAGES = {
   hero: heroSkim,
   spots: { barra: spotBarra, recreio: spotRecreio, grumari: spotGrumari },
-  news: [projetoTradicaoCover, elReyCover, skimForecastCover]
+  news: [projetoTradicaoCover, elReyCover, skimForecastCover],
+  riders: [riderSapo, riderSergio], // 👈 linha nova
 };
 
 export const SPOTS = [
@@ -132,7 +136,19 @@ Data: 17–19 de abril de 2026 · Local: Cabo San Lucas, México`,
 ];
 
 
-export const RIDERS: { name: string; spot: string; handle: string; image: string }[] = [];
+export const RIDERS: { name: string; spot: string; handle: string; image: string }[] = [{
+    name: "Sapo",
+    spot: "Recreio",      // ajuste se necessário
+    handle: "@sapo",      // ajuste o @ correto
+    image: riderSapo,
+  },
+  {
+    name: "Sergio",
+    spot: "Barra",        // ajuste se necessário
+    handle: "@sergio",    // ajuste o @ correto
+    image: riderSergio,
+  },
+];
 
 export type EventStatus = "concluido" | "em-breve";
 
