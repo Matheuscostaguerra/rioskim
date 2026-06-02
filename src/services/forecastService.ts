@@ -80,7 +80,7 @@ export async function fetchSpotForecast(spot: Spot): Promise<SpotForecast> {
 }
 
 export function getBestSpotNow(spots: SpotForecast[]): SpotForecast | null {
-  const candidates = spots.filter((s) => s.waveHeight !== null && s.waveHeight >= 0.8);
+  const candidates = spots.filter((s) => s.condition === "BOM" && s.waveHeight !== null);
   if (candidates.length === 0) return null;
   return candidates.reduce((best, s) => (s.waveHeight! > (best.waveHeight ?? 0) ? s : best));
 }
