@@ -87,7 +87,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           publisher: {
             "@type": "Person",
             name: "Matheus Guerra",
-            url: "https://rioskim.com",
+            url: "https://rioskim.com/sobre",
+            sameAs: ["https://www.instagram.com/rioskimboard"],
           },
         }),
       },
