@@ -21,6 +21,16 @@ export function FeaturedRiderCard({ image, name, nickname, category, instagram, 
           alt={name}
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          onError={(e) => {
+            const target = e.currentTarget;
+            if (!target.dataset.retried) {
+              target.dataset.retried = "1";
+              const idMatch = image.match(/\/d\/([a-zA-Z0-9_-]+)/);
+              if (idMatch) {
+                target.src = `https://drive.google.com/thumbnail?id=${idMatch[1]}&sz=w800`;
+              }
+            }
+          }}
         />
         <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1.5 bg-[var(--color-coral)] text-[var(--color-coral-foreground)] text-xs font-bold tracking-[0.25em] uppercase">
           <span className="w-1.5 h-1.5 rounded-full bg-current" />

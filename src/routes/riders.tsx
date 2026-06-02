@@ -23,11 +23,15 @@ type RiderRow = Record<string, string>;
 
 function toDirectImageUrl(url: string): string {
   if (!url) return "";
+
   const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+
   if (match) {
     const id = match[1];
-    return `https://wsrv.nl/?url=https://drive.google.com/thumbnail?id=${id}%26sz=w800`;
+
+    return `https://wsrv.nl/?url=https://lh3.googleusercontent.com/d/${id}=w800`;
   }
+
   return url;
 }
 
