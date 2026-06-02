@@ -21,11 +21,29 @@ export const SPOTS: Spot[] = [
 const CACHE_TTL_MS = 20 * 60 * 1000;
 let cache: { data: SpotForecast[]; timestamp: number } | null = null;
 
-export function classifyCondition(waveHeight: number | null): string {
-  if (waveHeight === null || waveHeight === undefined || isNaN(waveHeight)) return "FLAT";
-  if (waveHeight >= 1.5) return "ÉPICO";
-  if (waveHeight >= 1.0) return "BOM";
-  if (waveHeight >= 0.6) return "OK";
+export function classifySkimCondition(
+  waveHeight: number | null,
+  windSpeed: number | null,
+  wavePeriod: number | null,
+): string {
+  const wh = waveHeight ?? NaN;
+  const ws = windSpeed ?? NaN;
+  const wp = wavePeriod ?? NaN;
+  if (isNaN(wh) || isNaN(ws)) return "FLAT";
+
+  // ELIMINAÇÃO
+  if (ws > 20) return "FLAT";
+  if (wh > 2.0) return "FLAT";
+  if (!isNaN(wp) && wp > 14) return "FLAT";
+
+  // DEGRADAÇÃO
+  if (ws > 15) return "OK";
+  if (wh < 0.5) return "FLAT";
+
+  // POSITIVAS
+  if (wh >= 0.6 && wh <= 1.8 && ws <= 10 && (isNaN(wp) || wp <= 12)) return "BOM";
+  if (wh >= 0.5 && ws <= 15) return "OK";
+
   return "FLAT";
 }
 
@@ -48,7 +66,7 @@ export async function fetchSpotForecast(spot: Spot): Promise<SpotForecast> {
       waveHeight,
       wavePeriod,
       windSpeed,
-      condition: classifyCondition(waveHeight),
+      condition: classifySkimCondition(waveHeight, windSpeed, wavePeriod),
     };
   } catch {
     return {
@@ -62,7 +80,7 @@ export async function fetchSpotForecast(spot: Spot): Promise<SpotForecast> {
 }
 
 export function getBestSpotNow(spots: SpotForecast[]): SpotForecast | null {
-  const candidates = spots.filter((s) => s.waveHeight !== null && s.waveHeight >= 0.8);
+  const candidates = spots.filter((s) => s.condition === "BOM" && s.waveHeight !== null);
   if (candidates.length === 0) return null;
   return candidates.reduce((best, s) => (s.waveHeight! > (best.waveHeight ?? 0) ? s : best));
 }
