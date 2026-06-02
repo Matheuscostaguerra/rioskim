@@ -19,13 +19,13 @@ function GalleryPage() {
 const pool = [
   IMAGES.hero,
   IMAGES.news[0],
-  IMAGES.spots.recreio,
+  IMAGES.spots.macumba,
   IMAGES.riders[0],       // Sapo
   IMAGES.news[1],
-  IMAGES.spots.barra,
+  IMAGES.spots.vidigal,
   IMAGES.riders[1],       // Sergio
   IMAGES.news[2],
-  IMAGES.spots.grumari,
+  IMAGES.spots.itacoatiara,
   IMAGES.hero,
 ];
 
