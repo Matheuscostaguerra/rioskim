@@ -67,6 +67,31 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/r77ZKBfDw5M6Telxhxf56lTLo023/social-images/social-1779975803463-RIOSKIM_OFICIAL_P.webp" },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "RioSkim",
+          alternateName: "RioSkimboard",
+          url: "https://rioskim.com",
+          description: "A maior comunidade de skimboard do Rio de Janeiro.",
+          creator: {
+            "@type": "Person",
+            name: "Matheus Guerra",
+            jobTitle: "Fundador e Administrador",
+            url: "https://rioskim.com/sobre",
+            sameAs: ["https://www.instagram.com/rioskimboard"],
+          },
+          publisher: {
+            "@type": "Person",
+            name: "Matheus Guerra",
+            url: "https://rioskim.com",
+          },
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,

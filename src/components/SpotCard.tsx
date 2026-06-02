@@ -1,7 +1,7 @@
 type Props = {
   image: string;
   name: string;
-  difficulty: "Iniciante" | "Intermediário" | "Avançado";
+  difficulty: "Iniciante" | "Intermediário" | "Avançado" | "Todos os níveis";
   bottom: string;
   zone: string;
 };
