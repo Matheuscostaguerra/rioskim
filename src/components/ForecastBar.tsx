@@ -1,12 +1,20 @@
 import { Waves, Wind, ExternalLink } from "lucide-react";
-
-const SPOTS = [
-  { name: "Barra", wave: "0.8m", wind: "10kt", status: "BOM" },
-  { name: "Recreio", wave: "1.1m", wind: "12kt", status: "ÉPICO" },
-  { name: "Grumari", wave: "0.6m", wind: "8kt", status: "OK" },
-];
+import { useForecast } from "@/hooks/useForecast";
+import { SPOTS } from "@/services/forecastService";
 
 export function ForecastBar() {
+  const { spots, loading, error } = useForecast();
+
+  const rows = SPOTS.map((s) => {
+    const f = spots.find((x) => x.name === s.name);
+    return {
+      name: s.name,
+      waveHeight: f?.waveHeight ?? null,
+      windSpeed: f?.windSpeed ?? null,
+      condition: f?.condition ?? "FLAT",
+    };
+  });
+
   return (
     <section className="border-y border-border bg-card/50">
       <div className="container-rio py-4 flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
@@ -15,15 +23,37 @@ export function ForecastBar() {
           Hoje no Rio
         </div>
         <div className="flex-1 grid grid-cols-3 gap-4">
-          {SPOTS.map((s) => (
-            <div key={s.name} className="flex items-baseline gap-2 md:gap-3">
-              <span className="text-display text-xl md:text-2xl">{s.name}</span>
-              <span className="text-xs text-muted-foreground hidden sm:inline">{s.wave} · <Wind size={10} className="inline" /> {s.wind}</span>
-              <span className={`tag-pill ml-auto ${s.status === "ÉPICO" ? "text-[var(--color-coral)] border-[var(--color-coral)]" : ""}`}>
-                {s.status}
-              </span>
-            </div>
-          ))}
+          {rows.map((s) => {
+            const showLoading = loading;
+            const showOffline = !loading && error;
+            const wave = showLoading || s.waveHeight === null ? "--" : s.waveHeight.toFixed(1);
+            const wind = showLoading || s.windSpeed === null ? "--" : Math.round(s.windSpeed);
+
+            let badgeClass = "tag-pill ml-auto";
+            let badgeLabel: string | null = s.condition;
+            if (s.condition === "ÉPICO") badgeClass += " text-[var(--color-coral)] border-[var(--color-coral)]";
+            else if (s.condition === "BOM") badgeClass += " bg-foreground text-background border-foreground";
+            else if (s.condition === "OK") badgeClass += " text-muted-foreground border-transparent";
+            else badgeLabel = null; // FLAT → no badge
+
+            return (
+              <div key={s.name} className="flex items-baseline gap-2 md:gap-3">
+                <span className="text-display text-xl md:text-2xl">{s.name}</span>
+                <span className="text-xs text-muted-foreground hidden sm:inline">
+                  {showOffline ? (
+                    <span className="opacity-60">offline</span>
+                  ) : (
+                    <>
+                      {wave}m · <Wind size={10} className="inline" /> {wind}kt
+                    </>
+                  )}
+                </span>
+                {!showLoading && !showOffline && badgeLabel && (
+                  <span className={badgeClass}>{badgeLabel}</span>
+                )}
+              </div>
+            );
+          })}
         </div>
         <a
           href="https://skimforecast.com"
