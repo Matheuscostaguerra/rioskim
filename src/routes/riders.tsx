@@ -1,8 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { FeaturedRiderCard } from "@/components/FeaturedRiderCard";
-import sergioImg from "@/assets/rider-sergio.jpg";
-import sapoImg from "@/assets/rider-sapo.jpg";
 
 export const Route = createFileRoute("/riders")({
   head: () => ({
@@ -17,7 +16,93 @@ export const Route = createFileRoute("/riders")({
   component: RidersPage,
 });
 
+const CSV_URL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRvG6LsUsl8GHit8ESzXQysDXIHbDrbMdvwyYcUdmN0vgaSfM32uICwVb34VV2euhj9_A3FAkwYg9-D/pub?output=csv";
+
+type RiderRow = Record<string, string>;
+
+function parseCSV(text: string): RiderRow[] {
+  const rows: string[][] = [];
+  let cur: string[] = [];
+  let field = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"') {
+        if (text[i + 1] === '"') {
+          field += '"';
+          i++;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        field += c;
+      }
+    } else {
+      if (c === '"') {
+        inQuotes = true;
+      } else if (c === ",") {
+        cur.push(field);
+        field = "";
+      } else if (c === "\n" || c === "\r") {
+        if (c === "\r" && text[i + 1] === "\n") i++;
+        cur.push(field);
+        rows.push(cur);
+        cur = [];
+        field = "";
+      } else {
+        field += c;
+      }
+    }
+  }
+  if (field.length > 0 || cur.length > 0) {
+    cur.push(field);
+    rows.push(cur);
+  }
+
+  if (rows.length === 0) return [];
+  const headers = rows[0].map((h) => h.trim());
+  return rows
+    .slice(1)
+    .filter((r) => r.some((v) => v.trim() !== ""))
+    .map((r) => {
+      const obj: RiderRow = {};
+      headers.forEach((h, idx) => {
+        obj[h] = (r[idx] ?? "").trim();
+      });
+      return obj;
+    });
+}
+
 function RidersPage() {
+  const [riders, setRiders] = useState<RiderRow[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(CSV_URL)
+      .then((res) => {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.text();
+      })
+      .then((text) => {
+        if (cancelled) return;
+        setRiders(parseCSV(text));
+        setLoading(false);
+      })
+      .catch((e) => {
+        if (cancelled) return;
+        setError(e.message || "Erro ao carregar");
+        setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <>
       <PageHeader
@@ -31,34 +116,44 @@ function RidersPage() {
           <div className="tag-pill mb-3 text-[var(--color-coral)] border-[var(--color-coral)]">Destaque</div>
           <h2 className="text-display text-3xl md:text-5xl">Atletas em foco</h2>
         </div>
-        <div className="space-y-10 md:space-y-14">
-          <FeaturedRiderCard
-            image={sergioImg}
-            name="Sergio Baia"
-            category="Master"
-            instagram="https://www.instagram.com/sergiobaiapersonal/"
-            info={[
-              { label: "Idade", value: "49 anos" },
-              { label: "Base", value: "Regular" },
-              { label: "Praias", value: "Leblon · Vidigal" },
-              { label: "Hobbies", value: "Moto · Frescobol" },
-            ]}
-            about="Skimboarder há mais de 20 anos, formado em Educação Física pela UFRJ, personal trainer e colaborador do RioSkim desde a fundação."
-          />
-          <FeaturedRiderCard
-            image={sapoImg}
-            name="Thiago da Cruz Soares"
-            nickname="Sapo"
-            category="Master"
-            instagram="https://www.instagram.com/thiagosaposkim/"
-            info={[
-              { label: "Base", value: "Regular" },
-              { label: "Região", value: "Costa Verde" },
-              { label: "Picos na região", value: "Jacareí · Sununguinha" },
-              { label: "Picos no Brasil", value: "Sununga · São Conrado · Raladinho" },
-            ]}
-          />
-        </div>
+
+        {loading && (
+          <div className="py-16 text-center text-sm text-muted-foreground">
+            Carregando riders…
+          </div>
+        )}
+
+        {error && !loading && (
+          <div className="py-16 text-center text-sm text-muted-foreground">
+            Não foi possível carregar os riders agora. Tenta de novo daqui a pouco.
+          </div>
+        )}
+
+        {!loading && !error && (
+          <div className="space-y-10 md:space-y-14">
+            {riders.map((r, i) => {
+              const info = [1, 2, 3, 4]
+                .map((n) => ({
+                  label: r[`label${n}`] ?? "",
+                  value: r[`value${n}`] ?? "",
+                }))
+                .filter((item) => item.label !== "" && item.value !== "");
+
+              return (
+                <FeaturedRiderCard
+                  key={`${r.name}-${i}`}
+                  image={r.imageUrl}
+                  name={r.name}
+                  nickname={r.nickname ? r.nickname : undefined}
+                  category={r.category}
+                  instagram={r.instagram ? r.instagram : undefined}
+                  about={r.about ? r.about : undefined}
+                  info={info}
+                />
+              );
+            })}
+          </div>
+        )}
 
         <div className="mt-16 md:mt-20 border border-border py-10 px-6 text-center">
           <p className="text-sm text-muted-foreground max-w-md mx-auto">
@@ -69,4 +164,3 @@ function RidersPage() {
     </>
   );
 }
-
