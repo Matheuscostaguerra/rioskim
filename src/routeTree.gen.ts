@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SpotsRouteImport } from './routes/spots'
+import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RidersRouteImport } from './routes/riders'
 import { Route as LojaRouteImport } from './routes/loja'
@@ -24,6 +25,11 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 const SpotsRoute = SpotsRouteImport.update({
   id: '/spots',
   path: '/spots',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -86,6 +92,7 @@ export interface FileRoutesByFullPath {
   '/loja': typeof LojaRoute
   '/riders': typeof RidersRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre': typeof SobreRoute
   '/spots': typeof SpotsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByTo {
   '/loja': typeof LojaRoute
   '/riders': typeof RidersRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre': typeof SobreRoute
   '/spots': typeof SpotsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
@@ -112,6 +120,7 @@ export interface FileRoutesById {
   '/loja': typeof LojaRoute
   '/riders': typeof RidersRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre': typeof SobreRoute
   '/spots': typeof SpotsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
@@ -127,6 +136,7 @@ export interface FileRouteTypes {
     | '/loja'
     | '/riders'
     | '/sitemap.xml'
+    | '/sobre'
     | '/spots'
     | '/blog/$slug'
     | '/blog/'
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/loja'
     | '/riders'
     | '/sitemap.xml'
+    | '/sobre'
     | '/spots'
     | '/blog/$slug'
     | '/blog'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
     | '/loja'
     | '/riders'
     | '/sitemap.xml'
+    | '/sobre'
     | '/spots'
     | '/blog/$slug'
     | '/blog/'
@@ -166,6 +178,7 @@ export interface RootRouteChildren {
   LojaRoute: typeof LojaRoute
   RidersRoute: typeof RidersRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SobreRoute: typeof SobreRoute
   SpotsRoute: typeof SpotsRoute
 }
 
@@ -176,6 +189,13 @@ declare module '@tanstack/react-router' {
       path: '/spots'
       fullPath: '/spots'
       preLoaderRoute: typeof SpotsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -272,8 +292,19 @@ const rootRouteChildren: RootRouteChildren = {
   LojaRoute: LojaRoute,
   RidersRoute: RidersRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SobreRoute: SobreRoute,
   SpotsRoute: SpotsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
