@@ -91,6 +91,12 @@ export async function fetchAllSpots(): Promise<SpotForecast[]> {
   }
   try {
     const data = await Promise.all(SPOTS.map(fetchSpotForecast));
+    data.forEach((s) => {
+      // eslint-disable-next-line no-console
+      console.log(
+        `[RioSkim Forecast] ${s.name}: waveHeight=${s.waveHeight}m | windSpeed=${s.windSpeed}kt | wavePeriod=${s.wavePeriod}s | condition=${s.condition} | source=API`,
+      );
+    });
     cache = { data, timestamp: Date.now() };
     return data;
   } catch {
