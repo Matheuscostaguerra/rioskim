@@ -66,7 +66,7 @@ export async function fetchSpotForecast(spot: Spot): Promise<SpotForecast> {
       waveHeight,
       wavePeriod,
       windSpeed,
-      condition: classifyCondition(waveHeight),
+      condition: classifySkimCondition(waveHeight, windSpeed, wavePeriod),
     };
   } catch {
     return {
