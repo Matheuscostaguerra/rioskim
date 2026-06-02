@@ -23,6 +23,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { bestSpot, loading: forecastLoading } = useForecast();
+
   return (
     <>
       {/* HERO */}
@@ -42,10 +44,14 @@ function Index() {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/40" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-transparent" />
         <div className="relative container-rio h-full flex flex-col justify-end pb-16 md:pb-24">
-          <div className="tag-pill mb-6 self-start text-[var(--color-coral)] border-[var(--color-coral)]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-coral)] animate-pulse" />
-            Ao vivo · Recreio quebrando agora
-          </div>
+          {forecastLoading ? (
+            <div className="mb-6 self-start h-7 w-72 rounded-md bg-foreground/10 animate-pulse" />
+          ) : bestSpot ? (
+            <div className="tag-pill mb-6 self-start text-[var(--color-coral)] border-[var(--color-coral)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-coral)] animate-pulse" />
+              Ao vivo · {bestSpot.name} quebrando agora
+            </div>
+          ) : null}
           <h1 className="text-display text-[clamp(3.5rem,12vw,11rem)] max-w-5xl">
             O skim é<br />
             <span className="text-[var(--color-coral)]">do Rio.</span>
