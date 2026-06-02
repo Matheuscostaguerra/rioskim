@@ -151,7 +151,7 @@ function RidersPage() {
               return (
                 <FeaturedRiderCard
                   key={`${r.name}-${i}`}
-                  image={r.imageUrl}
+                  image={toDirectImageUrl(r.imageUrl)}
                   name={r.name}
                   nickname={r.nickname ? r.nickname : undefined}
                   category={r.category}
