@@ -31,10 +31,12 @@ export function ForecastBar() {
 
             let badgeClass = "tag-pill ml-auto";
             let badgeLabel: string | null = s.condition;
-            if (s.condition === "ÉPICO") badgeClass += " text-[var(--color-coral)] border-[var(--color-coral)]";
-            else if (s.condition === "BOM") badgeClass += " bg-foreground text-background border-foreground";
-            else if (s.condition === "OK") badgeClass += " text-muted-foreground border-transparent";
-            else badgeLabel = null; // FLAT → no badge
+            let badgeTitle: string | undefined;
+            if (s.condition === "BOM") badgeClass += " bg-background text-foreground border-foreground";
+            else if (s.condition === "OK") {
+              badgeClass += " text-muted-foreground/70 border-transparent";
+              badgeTitle = "Condições instáveis — confira antes de ir";
+            } else badgeLabel = null; // FLAT → no badge
 
             return (
               <div key={s.name} className="flex items-baseline gap-2 md:gap-3">
