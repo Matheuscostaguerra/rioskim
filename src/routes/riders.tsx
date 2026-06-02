@@ -25,7 +25,8 @@ function toDirectImageUrl(url: string): string {
   if (!url) return "";
   const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
   if (match) {
-    return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`;
+    const id = match[1];
+    return `https://wsrv.nl/?url=https://drive.google.com/thumbnail?id=${id}%26sz=w800`;
   }
   return url;
 }
