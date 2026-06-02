@@ -51,7 +51,7 @@ export function ForecastBar() {
                   )}
                 </span>
                 {!showLoading && !showOffline && badgeLabel && (
-                  <span className={badgeClass}>{badgeLabel}</span>
+                  <span className={badgeClass} title={badgeTitle}>{badgeLabel}</span>
                 )}
               </div>
             );
