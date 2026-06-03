@@ -10,8 +10,31 @@ export type NotionPost = {
   image: string;
   content: string;
   images: Record<string, string>;
+  videos: Record<string, string>;
   publishedAt: string | null;
 };
+
+function toYouTubeEmbed(url: string): string | null {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, "");
+    if (host === "youtu.be") {
+      const id = u.pathname.slice(1).split("/")[0];
+      return id ? `https://www.youtube.com/embed/${id}` : null;
+    }
+    if (host.endsWith("youtube.com") || host.endsWith("youtube-nocookie.com")) {
+      if (u.pathname === "/watch") {
+        const id = u.searchParams.get("v");
+        return id ? `https://www.youtube.com/embed/${id}` : null;
+      }
+      const m = u.pathname.match(/^\/(embed|shorts|live|v)\/([^/?#]+)/);
+      if (m) return `https://www.youtube.com/embed/${m[2]}`;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
 
 const NOTION_VERSION = "2022-06-28";
 
@@ -63,7 +86,7 @@ function mapCategoria(raw: string): string {
   return map[raw.toLowerCase()] ?? "Cultura";
 }
 
-function parsePage(page: any): Omit<NotionPost, "content" | "images"> {
+function parsePage(page: any): Omit<NotionPost, "content" | "images" | "videos"> {
   const props = page.properties ?? {};
   const title = getTitle(props["Name"]);
   const slug = toSlug(title);
@@ -86,18 +109,25 @@ function parsePage(page: any): Omit<NotionPost, "content" | "images"> {
 
 async function fetchBlocks(
   pageId: string,
-): Promise<{ content: string; images: Record<string, string>; excerpt: string }> {
+): Promise<{
+  content: string;
+  images: Record<string, string>;
+  videos: Record<string, string>;
+  excerpt: string;
+}> {
   const res = await fetch(
     `https://api.notion.com/v1/blocks/${pageId}/children?page_size=100`,
     { headers: notionHeaders() },
   );
-  if (!res.ok) return { content: "", images: {}, excerpt: "" };
+  if (!res.ok) return { content: "", images: {}, videos: {}, excerpt: "" };
   const data = await res.json();
   const blocks: any[] = data.results ?? [];
 
   const paragraphs: string[] = [];
   const images: Record<string, string> = {};
+  const videos: Record<string, string> = {};
   let imageIndex = 0;
+  let videoIndex = 0;
   let firstText = "";
 
   for (const block of blocks) {
@@ -131,6 +161,23 @@ async function fetchBlocks(
         }
         break;
       }
+      case "video":
+      case "embed":
+      case "bookmark": {
+        const raw =
+          block.video?.type === "external"
+            ? block.video.external?.url
+            : block.video?.file?.url ??
+              block.embed?.url ??
+              block.bookmark?.url;
+        const embed = raw ? toYouTubeEmbed(raw) : null;
+        if (embed) {
+          const key = `vid_${videoIndex++}`;
+          videos[key] = embed;
+          paragraphs.push(`[VIDEO:${key}]`);
+        }
+        break;
+      }
       case "bulleted_list_item":
       case "numbered_list_item": {
         const text =
@@ -146,6 +193,7 @@ async function fetchBlocks(
   return {
     content: paragraphs.join("\n\n"),
     images,
+    videos,
     excerpt: firstText.slice(0, 200),
   };
 }
@@ -176,6 +224,7 @@ export const getAllNotionPosts = createServerFn({ method: "GET" }).handler(
         ...parsePage(page),
         content: "",
         images: {},
+        videos: {},
       }));
     } catch (err) {
       console.error("[notion] getAllNotionPosts:", err);
@@ -191,8 +240,8 @@ export const getNotionPostBySlug = createServerFn({ method: "GET" })
       const all = await getAllNotionPosts();
       const meta = all.find((p) => p.slug === data.slug);
       if (!meta) return null;
-      const { content, images, excerpt } = await fetchBlocks(meta.id);
-      return { ...meta, content, images, excerpt };
+      const { content, images, videos, excerpt } = await fetchBlocks(meta.id);
+      return { ...meta, content, images, videos, excerpt };
     } catch (err) {
       console.error("[notion] getNotionPostBySlug:", err);
       return null;

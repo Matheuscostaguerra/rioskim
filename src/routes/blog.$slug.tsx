@@ -68,7 +68,8 @@ function BlogPostPage() {
       {post.content && (
         <div className="prose prose-invert max-w-3xl mt-10 md:mt-14">
           {post.content.split("\n\n").map((paragraph: string, i: number) => {
-            const imageMatch = paragraph.trim().match(/^\[IMAGE:(.+)\]$/);
+            const trimmed = paragraph.trim();
+            const imageMatch = trimmed.match(/^\[IMAGE:(.+)\]$/);
             if (imageMatch) {
               const key = imageMatch[1];
               const src = post.images?.[key];
@@ -77,6 +78,26 @@ function BlogPostPage() {
                 <figure key={i} className="my-8 not-prose">
                   <div className="relative overflow-hidden">
                     <img src={src} alt="" className="w-full object-cover" />
+                  </div>
+                </figure>
+              );
+            }
+            const videoMatch = trimmed.match(/^\[VIDEO:(.+)\]$/);
+            if (videoMatch) {
+              const key = videoMatch[1];
+              const src = post.videos?.[key];
+              if (!src) return null;
+              return (
+                <figure key={i} className="my-8 not-prose">
+                  <div className="relative aspect-video overflow-hidden bg-card">
+                    <iframe
+                      src={src}
+                      title="YouTube video"
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="absolute inset-0 h-full w-full"
+                    />
                   </div>
                 </figure>
               );
