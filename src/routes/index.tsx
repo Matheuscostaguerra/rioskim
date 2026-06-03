@@ -96,7 +96,7 @@ function Index() {
           <NewsCard size="lg" {...NEWS[0]} linkTo="/blog" />
           <div className="grid gap-10">
             <NewsCard {...NEWS[1]} linkTo="/blog" />
-            <NewsCard {...NEWS[2]} />
+            <NewsCard {...NEWS[2]} linkTo="/blog" />
           </div>
         </div>
       </section>
