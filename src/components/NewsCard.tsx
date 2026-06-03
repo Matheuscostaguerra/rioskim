@@ -7,9 +7,10 @@ type Props = {
   excerpt?: string;
   size?: "lg" | "md";
   slug?: string;
+  linkTo?: string;
 };
 
-export function NewsCard({ image, title, tag, excerpt, size = "md", slug }: Props) {
+export function NewsCard({ image, title, tag, excerpt, size = "md", slug, linkTo }: Props) {
   const content = (
     <article className="group cursor-pointer">
       <div className={`relative overflow-hidden bg-card mb-4 ${size === "lg" ? "aspect-[16/10]" : "aspect-[4/3]"}`}>
@@ -31,6 +32,14 @@ export function NewsCard({ image, title, tag, excerpt, size = "md", slug }: Prop
       )}
     </article>
   );
+
+  if (linkTo) {
+    return (
+      <Link to={linkTo as any} className="block">
+        {content}
+      </Link>
+    );
+  }
 
   if (slug) {
     return (
