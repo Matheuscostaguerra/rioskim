@@ -224,6 +224,7 @@ export const getAllNotionPosts = createServerFn({ method: "GET" }).handler(
         ...parsePage(page),
         content: "",
         images: {},
+        videos: {},
       }));
     } catch (err) {
       console.error("[notion] getAllNotionPosts:", err);
@@ -239,8 +240,8 @@ export const getNotionPostBySlug = createServerFn({ method: "GET" })
       const all = await getAllNotionPosts();
       const meta = all.find((p) => p.slug === data.slug);
       if (!meta) return null;
-      const { content, images, excerpt } = await fetchBlocks(meta.id);
-      return { ...meta, content, images, excerpt };
+      const { content, images, videos, excerpt } = await fetchBlocks(meta.id);
+      return { ...meta, content, images, videos, excerpt };
     } catch (err) {
       console.error("[notion] getNotionPostBySlug:", err);
       return null;
