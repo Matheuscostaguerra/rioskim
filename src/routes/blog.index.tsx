@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/PageHeader";
 import { NewsCard } from "@/components/NewsCard";
-import { getAllNotionPosts } from "@/lib/notion.functions";
+import { getAllNotionPosts, type NotionPost } from "@/lib/notion.functions";
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
@@ -38,7 +38,7 @@ function BlogPage() {
           <p className="text-muted-foreground">Nenhum post publicado ainda.</p>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
-            {posts.map((p) => (
+            {posts.map((p: NotionPost) => (
               <NewsCard
                 key={p.id}
                 image={p.image || "/placeholder.svg"}
