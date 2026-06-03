@@ -109,18 +109,25 @@ function parsePage(page: any): Omit<NotionPost, "content" | "images"> {
 
 async function fetchBlocks(
   pageId: string,
-): Promise<{ content: string; images: Record<string, string>; excerpt: string }> {
+): Promise<{
+  content: string;
+  images: Record<string, string>;
+  videos: Record<string, string>;
+  excerpt: string;
+}> {
   const res = await fetch(
     `https://api.notion.com/v1/blocks/${pageId}/children?page_size=100`,
     { headers: notionHeaders() },
   );
-  if (!res.ok) return { content: "", images: {}, excerpt: "" };
+  if (!res.ok) return { content: "", images: {}, videos: {}, excerpt: "" };
   const data = await res.json();
   const blocks: any[] = data.results ?? [];
 
   const paragraphs: string[] = [];
   const images: Record<string, string> = {};
+  const videos: Record<string, string> = {};
   let imageIndex = 0;
+  let videoIndex = 0;
   let firstText = "";
 
   for (const block of blocks) {
@@ -154,6 +161,23 @@ async function fetchBlocks(
         }
         break;
       }
+      case "video":
+      case "embed":
+      case "bookmark": {
+        const raw =
+          block.video?.type === "external"
+            ? block.video.external?.url
+            : block.video?.file?.url ??
+              block.embed?.url ??
+              block.bookmark?.url;
+        const embed = raw ? toYouTubeEmbed(raw) : null;
+        if (embed) {
+          const key = `vid_${videoIndex++}`;
+          videos[key] = embed;
+          paragraphs.push(`[VIDEO:${key}]`);
+        }
+        break;
+      }
       case "bulleted_list_item":
       case "numbered_list_item": {
         const text =
@@ -169,6 +193,7 @@ async function fetchBlocks(
   return {
     content: paragraphs.join("\n\n"),
     images,
+    videos,
     excerpt: firstText.slice(0, 200),
   };
 }
