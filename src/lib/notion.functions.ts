@@ -10,8 +10,31 @@ export type NotionPost = {
   image: string;
   content: string;
   images: Record<string, string>;
+  videos: Record<string, string>;
   publishedAt: string | null;
 };
+
+function toYouTubeEmbed(url: string): string | null {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, "");
+    if (host === "youtu.be") {
+      const id = u.pathname.slice(1).split("/")[0];
+      return id ? `https://www.youtube.com/embed/${id}` : null;
+    }
+    if (host.endsWith("youtube.com") || host.endsWith("youtube-nocookie.com")) {
+      if (u.pathname === "/watch") {
+        const id = u.searchParams.get("v");
+        return id ? `https://www.youtube.com/embed/${id}` : null;
+      }
+      const m = u.pathname.match(/^\/(embed|shorts|live|v)\/([^/?#]+)/);
+      if (m) return `https://www.youtube.com/embed/${m[2]}`;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
 
 const NOTION_VERSION = "2022-06-28";
 
