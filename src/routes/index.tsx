@@ -95,7 +95,7 @@ function Index() {
         <div className="grid gap-10 md:grid-cols-2 md:gap-12">
           <NewsCard size="lg" {...NEWS[0]} linkTo="/blog" />
           <div className="grid gap-10">
-            <NewsCard {...NEWS[1]} />
+            <NewsCard {...NEWS[1]} linkTo="/blog" />
             <NewsCard {...NEWS[2]} />
           </div>
         </div>
