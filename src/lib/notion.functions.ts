@@ -86,7 +86,7 @@ function mapCategoria(raw: string): string {
   return map[raw.toLowerCase()] ?? "Cultura";
 }
 
-function parsePage(page: any): Omit<NotionPost, "content" | "images"> {
+function parsePage(page: any): Omit<NotionPost, "content" | "images" | "videos"> {
   const props = page.properties ?? {};
   const title = getTitle(props["Name"]);
   const slug = toSlug(title);
