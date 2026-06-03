@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 type Props = {
   image: string;
   title: string;
-  tag: "Campeonato" | "Comunidade" | "Forecast" | "Cultura";
+  tag: string;
   excerpt?: string;
   size?: "lg" | "md";
   slug?: string;

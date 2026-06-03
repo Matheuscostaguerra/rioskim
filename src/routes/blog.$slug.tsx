@@ -1,10 +1,15 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
-import { NEWS } from "@/lib/data";
+import { getNotionPostBySlug } from "@/lib/notion.functions";
 
 export const Route = createFileRoute("/blog/$slug")({
-  head: ({ params }) => {
-    const post = NEWS.find((n) => n.slug === params.slug);
+  loader: async ({ params }) => {
+    const post = await getNotionPostBySlug({ data: { slug: params.slug } });
+    if (!post) throw notFound();
+    return { post };
+  },
+  head: ({ loaderData }) => {
+    const post = loaderData?.post;
     const title = post ? `${post.title} — RioSkim` : "Post — RioSkim";
     const desc = post?.excerpt ?? "Reports e cultura do skimboard carioca.";
     return {
@@ -16,11 +21,6 @@ export const Route = createFileRoute("/blog/$slug")({
         ...(post?.image ? [{ property: "og:image", content: post.image }] : []),
       ],
     };
-  },
-  loader: ({ params }) => {
-    const post = NEWS.find((n) => n.slug === params.slug);
-    if (!post) throw notFound();
-    return { post };
   },
   component: BlogPostPage,
   notFoundComponent: () => {
@@ -55,46 +55,40 @@ function BlogPostPage() {
       <h1 className="text-display text-4xl md:text-7xl leading-[0.95] max-w-4xl">
         {post.title}
       </h1>
-      <div className="relative aspect-[16/9] overflow-hidden bg-card my-10 md:my-14">
-        <img src={post.image} alt={post.title} className="h-full w-full object-cover" />
-      </div>
+      {post.image && (
+        <div className="relative aspect-[16/9] overflow-hidden bg-card my-10 md:my-14">
+          <img src={post.image} alt={post.title} className="h-full w-full object-cover" />
+        </div>
+      )}
       {post.excerpt && (
         <p className="text-lg md:text-xl text-muted-foreground max-w-3xl leading-relaxed">
           {post.excerpt}
         </p>
       )}
       {post.content && (
-  <div className="prose prose-invert max-w-3xl mt-10 md:mt-14">
-    {post.content.split('\n\n').map((paragraph: string, i: number) => {
-      const imageMatch = paragraph.trim().match(/^\[IMAGE:(.+)\]$/);
-
-      if (imageMatch) {
-        const key = imageMatch[1];
-        const src = (post.images as Record<string, string> | undefined)?.[key];
-
-        if (!src) return null;
-
-        return (
-          <figure key={i} className="my-8 not-prose">
-            <div className="relative overflow-hidden">
-              <img
-                src={src}
-                alt={key}
-                className="w-full object-cover"
-              />
-            </div>
-          </figure>
-        );
-      }
-
-      return (
-        <p key={i} className="text-base leading-relaxed text-foreground/90">
-          {paragraph}
-        </p>
-      );
-    })}
-  </div>
-)}
+        <div className="prose prose-invert max-w-3xl mt-10 md:mt-14">
+          {post.content.split("\n\n").map((paragraph: string, i: number) => {
+            const imageMatch = paragraph.trim().match(/^\[IMAGE:(.+)\]$/);
+            if (imageMatch) {
+              const key = imageMatch[1];
+              const src = post.images?.[key];
+              if (!src) return null;
+              return (
+                <figure key={i} className="my-8 not-prose">
+                  <div className="relative overflow-hidden">
+                    <img src={src} alt="" className="w-full object-cover" />
+                  </div>
+                </figure>
+              );
+            }
+            return (
+              <p key={i} className="text-base leading-relaxed text-foreground/90">
+                {paragraph}
+              </p>
+            );
+          })}
+        </div>
+      )}
     </article>
   );
 }
