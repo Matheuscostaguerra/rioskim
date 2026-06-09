@@ -12,7 +12,9 @@ const NAV = [
   { to: "/forecast", label: "Forecast" },
   { to: "/blog", label: "Blog" },
   { to: "/loja", label: "Loja" },
+  { to: "/apoie", label: "Apoie ❤" },
 ] as const;
+
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -23,17 +25,25 @@ export function Navbar() {
           <Logo />
         </Link>
         <nav className="hidden lg:flex items-center gap-7">
-          {NAV.map((n) => (
-            <Link
-              key={n.to}
-              to={n.to}
-              activeOptions={{ exact: n.to === "/" }}
-              className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground transition-colors"
-              activeProps={{ className: "text-foreground" }}
-            >
-              {n.label}
-            </Link>
-          ))}
+          {NAV.map((n) => {
+            const isApoie = n.to === "/apoie";
+            return (
+              <Link
+                key={n.to}
+                to={n.to}
+                activeOptions={{ exact: n.to === "/" }}
+                className={
+                  isApoie
+                    ? "text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-coral)] hover:opacity-80 transition-opacity"
+                    : "text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground transition-colors"
+                }
+                activeProps={isApoie ? undefined : { className: "text-foreground" }}
+              >
+                {n.label}
+              </Link>
+            );
+          })}
+
         </nav>
         <a
           href="https://skimforecast.com"

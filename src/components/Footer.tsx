@@ -26,6 +26,8 @@ export function Footer() {
             <a href="https://skimforecast.com" target="_blank" rel="noreferrer" className="block text-sm text-[var(--color-coral)]">skimforecast.com ↗</a>
             <Link to="/blog" className="block text-sm hover:text-[var(--color-coral)]">Notícias</Link>
             <Link to="/loja" className="block text-sm hover:text-[var(--color-coral)]">Loja</Link>
+            <Link to="/apoie" className="block text-sm text-[var(--color-coral)] hover:opacity-80">Apoie o Rio Skim ❤</Link>
+
           </div>
         </div>
         <div className="space-y-4">

@@ -18,6 +18,7 @@ import { Route as GaleriaRouteImport } from './routes/galeria'
 import { Route as ForecastRouteImport } from './routes/forecast'
 import { Route as EventosRouteImport } from './routes/eventos'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as ApoieRouteImport } from './routes/apoie'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
@@ -67,6 +68,11 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApoieRoute = ApoieRouteImport.update({
+  id: '/apoie',
+  path: '/apoie',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -85,6 +91,7 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/apoie': typeof ApoieRoute
   '/blog': typeof BlogRouteWithChildren
   '/eventos': typeof EventosRoute
   '/forecast': typeof ForecastRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/apoie': typeof ApoieRoute
   '/eventos': typeof EventosRoute
   '/forecast': typeof ForecastRoute
   '/galeria': typeof GaleriaRoute
@@ -113,6 +121,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/apoie': typeof ApoieRoute
   '/blog': typeof BlogRouteWithChildren
   '/eventos': typeof EventosRoute
   '/forecast': typeof ForecastRoute
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/apoie'
     | '/blog'
     | '/eventos'
     | '/forecast'
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/apoie'
     | '/eventos'
     | '/forecast'
     | '/galeria'
@@ -156,6 +167,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/apoie'
     | '/blog'
     | '/eventos'
     | '/forecast'
@@ -171,6 +183,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApoieRoute: typeof ApoieRoute
   BlogRoute: typeof BlogRouteWithChildren
   EventosRoute: typeof EventosRoute
   ForecastRoute: typeof ForecastRoute
@@ -247,6 +260,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/apoie': {
+      id: '/apoie'
+      path: '/apoie'
+      fullPath: '/apoie'
+      preLoaderRoute: typeof ApoieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -285,6 +305,7 @@ const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApoieRoute: ApoieRoute,
   BlogRoute: BlogRouteWithChildren,
   EventosRoute: EventosRoute,
   ForecastRoute: ForecastRoute,
