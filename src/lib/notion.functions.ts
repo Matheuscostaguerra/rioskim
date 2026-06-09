@@ -12,6 +12,8 @@ export type NotionPost = {
   images: Record<string, string>;
   videos: Record<string, string>;
   publishedAt: string | null;
+  link?: string;
+  destaque?: boolean;
 };
 
 function toYouTubeEmbed(url: string): string | null {
