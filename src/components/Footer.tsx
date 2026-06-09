@@ -37,7 +37,7 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <SponsorsBanner />
+      
       <div className="border-t border-border">
         <div className="container-rio py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
           <div>© {new Date().getFullYear()} RioSkim. Skim é do Rio.</div>
