@@ -26,11 +26,13 @@ export const Route = createFileRoute("/")({
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
+  loader: () => getFeaturedNotionPosts(),
   component: Index,
 });
 
 function Index() {
   const { bestSpot, loading: forecastLoading } = useForecast();
+  const featured = Route.useLoaderData();
 
   return (
     <>
