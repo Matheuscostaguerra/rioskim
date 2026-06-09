@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
 import { IMAGES, SPOTS, EVENTS } from "@/lib/data";
+import { SponsorsSection } from "@/components/SponsorsSection";
 import { ForecastBar } from "@/components/ForecastBar";
 import { SpotCard } from "@/components/SpotCard";
 import { useForecast } from "@/hooks/useForecast";
@@ -269,6 +270,8 @@ function Index() {
           </p>
         </div>
       </section>
+
+      <SponsorsSection />
     </>
   );
 }
