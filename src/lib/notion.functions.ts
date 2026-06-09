@@ -258,3 +258,10 @@ export const getNotionPostBySlug = createServerFn({ method: "GET" })
       return null;
     }
   });
+
+export const getFeaturedNotionPosts = createServerFn({ method: "GET" }).handler(
+  async (): Promise<NotionPost[]> => {
+    const all = await getAllNotionPosts();
+    return all.filter((p) => p.destaque);
+  },
+);
