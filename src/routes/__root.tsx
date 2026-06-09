@@ -66,7 +66,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/r77ZKBfDw5M6Telxhxf56lTLo023/social-images/social-1779975803463-RIOSKIM_OFICIAL_P.webp" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/r77ZKBfDw5M6Telxhxf56lTLo023/social-images/social-1779975803463-RIOSKIM_OFICIAL_P.webp" },
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
+    links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" },
+      { rel: "stylesheet", href: appCss },
+    ],
     scripts: [
       {
         type: "application/ld+json",
