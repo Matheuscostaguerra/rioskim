@@ -22,26 +22,21 @@ export function SponsorsSection() {
         >
           APOIADORES
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 place-items-center">
+        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
           {sponsors.map((s) => (
             <a
               key={s.nome}
               href={s.site_url}
               target="_blank"
               rel="noreferrer"
-              className="group"
+              className="inline-flex items-center justify-center transition-transform duration-300 hover:scale-105"
             >
-              <div
-                className="flex items-center justify-center rounded-xl p-6 transition-all duration-300 border border-white/[0.08] group-hover:border-white/20 group-hover:scale-[1.03] w-[120px] h-[120px] md:w-[160px] md:h-[160px]"
-                style={{ backgroundColor: "#1a1a2e" }}
-              >
-                <img
-                  src={s.logo_url}
-                  alt={s.nome}
-                  className="h-full w-full object-contain brightness-0 invert"
-                  loading="lazy"
-                />
-              </div>
+              <img
+                src={s.logo_url}
+                alt={s.nome}
+                className="h-32 md:h-40 w-auto object-contain"
+                loading="lazy"
+              />
             </a>
           ))}
         </div>
