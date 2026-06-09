@@ -33,6 +33,18 @@ function parseCSVLine(line: string): string[] {
   return result;
 }
 
+
+function normalizeLogoUrl(url: string): string {
+  if (!url) return url;
+  // Convert Google Drive share/view links to a hotlink-friendly URL.
+  // Matches: /file/d/{ID}/, ?id={ID}, /uc?...id={ID}
+  const m =
+    url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) ||
+    url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if (m) return `https://lh3.googleusercontent.com/d/${m[1]}=w400`;
+  return url;
+}
+
 function parseSponsorsCSV(csv: string): Sponsor[] {
   const lines = csv.trim().split(/\r?\n/);
   if (lines.length < 2) return [];
@@ -50,7 +62,7 @@ function parseSponsorsCSV(csv: string): Sponsor[] {
     if (ativo.trim().toUpperCase() === "TRUE") {
       sponsors.push({
         nome: nome.trim(),
-        logo_url: logo_url.trim(),
+        logo_url: normalizeLogoUrl(logo_url.trim()),
         site_url: site_url.trim(),
         ativo: true,
         ordem: parseInt(ordem.trim(), 10) || 0,
