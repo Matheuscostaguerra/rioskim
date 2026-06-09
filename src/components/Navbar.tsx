@@ -12,7 +12,9 @@ const NAV = [
   { to: "/forecast", label: "Forecast" },
   { to: "/blog", label: "Blog" },
   { to: "/loja", label: "Loja" },
+  { to: "/apoie", label: "Apoie ❤" },
 ] as const;
+
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
