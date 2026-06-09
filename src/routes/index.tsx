@@ -270,6 +270,8 @@ function Index() {
           </p>
         </div>
       </section>
+
+      <SponsorsSection />
     </>
   );
 }
