@@ -1,10 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
-import { IMAGES, NEWS, SPOTS, EVENTS } from "@/lib/data";
+import { IMAGES, SPOTS, EVENTS } from "@/lib/data";
 import { ForecastBar } from "@/components/ForecastBar";
-import { NewsCard } from "@/components/NewsCard";
 import { SpotCard } from "@/components/SpotCard";
 import { useForecast } from "@/hooks/useForecast";
+import { getFeaturedNotionPosts, type NotionPost } from "@/lib/notion.functions";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
 import sergioImg from "@/assets/rider-sergio.jpg";
 import sapoImg from "@/assets/rider-sapo.jpg";
 
