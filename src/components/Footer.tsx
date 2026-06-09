@@ -1,6 +1,67 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Youtube, Mail } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import { Logo } from "./Logo";
+import { getSponsors } from "@/lib/sponsors.functions";
+
+function SponsorsBanner() {
+  const { data } = useQuery({
+    queryKey: ["sponsors"],
+    queryFn: () => getSponsors(),
+  });
+
+  const sponsors = data?.sponsors ?? [];
+  if (sponsors.length === 0) return null;
+
+  return (
+    <div style={{ backgroundColor: "#111111" }} className="py-8">
+      <div className="container-rio">
+        <p
+          className="text-center text-xs uppercase tracking-[0.2em] mb-6"
+          style={{ color: "#666666" }}
+        >
+          APOIADORES
+        </p>
+        <div className="hidden md:flex items-center justify-center flex-wrap gap-8">
+          {sponsors.map((s) => (
+            <a
+              key={s.nome}
+              href={s.site_url}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+            >
+              <img
+                src={s.logo_url}
+                alt={s.nome}
+                className="h-[40px] w-auto object-contain"
+                loading="lazy"
+              />
+            </a>
+          ))}
+        </div>
+        <div className="grid grid-cols-2 gap-8 md:hidden place-items-center">
+          {sponsors.map((s) => (
+            <a
+              key={s.nome}
+              href={s.site_url}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+            >
+              <img
+                src={s.logo_url}
+                alt={s.nome}
+                className="h-[40px] w-auto object-contain"
+                loading="lazy"
+              />
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function Footer() {
   return (
@@ -37,6 +98,7 @@ export function Footer() {
           </div>
         </div>
       </div>
+      <SponsorsBanner />
       <div className="border-t border-border">
         <div className="container-rio py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
           <div>© {new Date().getFullYear()} RioSkim. Skim é do Rio.</div>
