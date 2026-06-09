@@ -106,46 +106,33 @@ function Index() {
         ) : (
           <Carousel opts={{ align: "start", loop: false }} className="w-full">
             <CarouselContent className="-ml-6">
-              {featured.map((post: NotionPost) => {
-                const href = post.link || `/blog/${post.slug}`;
-                const isExternal = /^https?:\/\//i.test(href);
-                const card = (
-                  <article className="group cursor-pointer">
-                    <div className="relative overflow-hidden bg-card mb-4 aspect-[4/3]">
-                      <img
-                        src={post.image || "/placeholder.svg"}
-                        alt={post.title}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <span className="absolute top-3 left-3 tag-pill bg-background/80 backdrop-blur">
-                        {post.tag}
-                      </span>
-                    </div>
-                    <h3 className="text-display text-2xl leading-[0.95] group-hover:text-[var(--color-coral)] transition-colors">
-                      {post.title}
-                    </h3>
-                    {post.excerpt && (
-                      <p className="mt-3 text-sm text-muted-foreground max-w-prose line-clamp-3">
-                        {post.excerpt}
-                      </p>
-                    )}
-                  </article>
-                );
-                return (
-                  <CarouselItem key={post.id} className="pl-6 md:basis-1/2 lg:basis-1/3">
-                    {isExternal ? (
-                      <a href={href} target="_blank" rel="noreferrer" className="block">
-                        {card}
-                      </a>
-                    ) : (
-                      <Link to={href as any} className="block">
-                        {card}
-                      </Link>
-                    )}
-                  </CarouselItem>
-                );
-              })}
+              {featured.map((post: NotionPost) => (
+                <CarouselItem key={post.id} className="pl-6 md:basis-1/2 lg:basis-1/3">
+                  <Link to="/blog/$slug" params={{ slug: post.slug }} className="block">
+                    <article className="group cursor-pointer">
+                      <div className="relative overflow-hidden bg-card mb-4 aspect-[4/3]">
+                        <img
+                          src={post.image || "/placeholder.svg"}
+                          alt={post.title}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <span className="absolute top-3 left-3 tag-pill bg-background/80 backdrop-blur">
+                          {post.tag}
+                        </span>
+                      </div>
+                      <h3 className="text-display text-2xl leading-[0.95] group-hover:text-[var(--color-coral)] transition-colors">
+                        {post.title}
+                      </h3>
+                      {post.excerpt && (
+                        <p className="mt-3 text-sm text-muted-foreground max-w-prose line-clamp-3">
+                          {post.excerpt}
+                        </p>
+                      )}
+                    </article>
+                  </Link>
+                </CarouselItem>
+              ))}
             </CarouselContent>
             <CarouselPrevious className="hidden md:flex -left-4 lg:-left-12" />
             <CarouselNext className="hidden md:flex -right-4 lg:-right-12" />
