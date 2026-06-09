@@ -1,8 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Youtube, Mail } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
 import { Logo } from "./Logo";
-import { getSponsors } from "@/lib/sponsors.functions";
 
 function SponsorsBanner() {
   const { data } = useQuery({
