@@ -88,6 +88,13 @@ function mapCategoria(raw: string): string {
   return map[raw.toLowerCase()] ?? "Cultura";
 }
 
+function getCheckbox(prop: any): boolean {
+  return Boolean(prop?.checkbox);
+}
+function getUrl(prop: any): string {
+  return prop?.url ?? "";
+}
+
 function parsePage(page: any): Omit<NotionPost, "content" | "images" | "videos"> {
   const props = page.properties ?? {};
   const title = getTitle(props["Name"]);
@@ -106,6 +113,8 @@ function parsePage(page: any): Omit<NotionPost, "content" | "images" | "videos">
     excerpt: "",
     image,
     publishedAt: getDate(props["Date"]),
+    link: getUrl(props["link"]) || undefined,
+    destaque: getCheckbox(props["Destaque"]),
   };
 }
 
