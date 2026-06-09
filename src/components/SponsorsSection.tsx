@@ -11,7 +11,10 @@ export function SponsorsSection() {
   if (sponsors.length === 0) return null;
 
   return (
-    <section className="border-y border-white/10 py-20">
+    <section
+      className="border-y border-white/10 py-20"
+      style={{ backgroundColor: "#0f1123" }}
+    >
       <div className="container-rio">
         <p
           className="text-center text-xs uppercase tracking-[0.2em] mb-14"
