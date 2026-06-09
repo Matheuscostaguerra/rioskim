@@ -13,7 +13,7 @@ export function SponsorsSection() {
   return (
     <section
       className="border-y border-white/10 py-20"
-      style={{ backgroundColor: "#0f1123" }}
+      style={{ backgroundColor: "#000000" }}
     >
       <div className="container-rio">
         <p
