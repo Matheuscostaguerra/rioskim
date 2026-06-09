@@ -50,7 +50,7 @@ function parseSponsorsCSV(csv: string): Sponsor[] {
     if (ativo.trim().toUpperCase() === "TRUE") {
       sponsors.push({
         nome: nome.trim(),
-        logo_url: logo_url.trim(),
+        logo_url: normalizeLogoUrl(logo_url.trim()),
         site_url: site_url.trim(),
         ativo: true,
         ordem: parseInt(ordem.trim(), 10) || 0,
