@@ -12,6 +12,8 @@ export type NotionPost = {
   images: Record<string, string>;
   videos: Record<string, string>;
   publishedAt: string | null;
+  link?: string;
+  destaque?: boolean;
 };
 
 function toYouTubeEmbed(url: string): string | null {
@@ -86,6 +88,13 @@ function mapCategoria(raw: string): string {
   return map[raw.toLowerCase()] ?? "Cultura";
 }
 
+function getCheckbox(prop: any): boolean {
+  return Boolean(prop?.checkbox);
+}
+function getUrl(prop: any): string {
+  return prop?.url ?? "";
+}
+
 function parsePage(page: any): Omit<NotionPost, "content" | "images" | "videos"> {
   const props = page.properties ?? {};
   const title = getTitle(props["Name"]);
@@ -104,6 +113,8 @@ function parsePage(page: any): Omit<NotionPost, "content" | "images" | "videos">
     excerpt: "",
     image,
     publishedAt: getDate(props["Date"]),
+    link: getUrl(props["link"]) || undefined,
+    destaque: getCheckbox(props["Destaque"]),
   };
 }
 
@@ -247,3 +258,10 @@ export const getNotionPostBySlug = createServerFn({ method: "GET" })
       return null;
     }
   });
+
+export const getFeaturedNotionPosts = createServerFn({ method: "GET" }).handler(
+  async (): Promise<NotionPost[]> => {
+    const all = await getAllNotionPosts();
+    return all.filter((p) => p.destaque);
+  },
+);
