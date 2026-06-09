@@ -10,34 +10,35 @@ export function SponsorsSection() {
   const sponsors = data?.sponsors ?? [];
   if (sponsors.length === 0) return null;
 
-  const topSponsors = sponsors.slice(0, 3);
-
   return (
     <section
-      style={{ backgroundColor: "#1a1a2e" }}
-      className="py-16 md:py-20 border-y border-white/10"
+      className="border-y border-white/10 py-20"
+      style={{ backgroundColor: "#0f1123" }}
     >
       <div className="container-rio">
         <p
-          className="text-center text-xs uppercase tracking-[0.2em] mb-10 md:mb-14"
+          className="text-center text-xs uppercase tracking-[0.2em] mb-14"
           style={{ color: "var(--color-coral)" }}
         >
           APOIADORES
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-12 md:gap-20">
-          {topSponsors.map((s) => (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 place-items-center">
+          {sponsors.map((s) => (
             <a
               key={s.nome}
               href={s.site_url}
               target="_blank"
               rel="noreferrer"
-              className="group block"
+              className="group"
             >
-              <div className="transition-all duration-300 group-hover:scale-105 group-hover:ring-1 group-hover:ring-white/30 group-hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] rounded-lg p-3">
+              <div
+                className="flex items-center justify-center rounded-xl p-6 transition-all duration-300 border border-white/[0.08] group-hover:border-white/20 group-hover:scale-[1.03] w-[120px] h-[120px] md:w-[160px] md:h-[160px]"
+                style={{ backgroundColor: "#1a1a2e" }}
+              >
                 <img
                   src={s.logo_url}
                   alt={s.nome}
-                  className="h-[120px] md:h-[160px] w-auto object-contain"
+                  className="h-full w-full object-contain brightness-0 invert"
                   loading="lazy"
                 />
               </div>
