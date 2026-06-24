@@ -8,6 +8,7 @@ export const Route = createFileRoute("/loja")({
       { name: "description", content: "Loja oficial da comunidade RioSkim." },
       { property: "og:title", content: "Loja — RioSkim" },
       { property: "og:description", content: "Loja oficial da comunidade RioSkim." },
+      { "http-equiv": "refresh", content: "0;url=https://loja.rioskim.com" },
     ],
     links: [{ rel: "canonical", href: "https://loja.rioskim.com" }],
   }),
