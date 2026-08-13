@@ -174,13 +174,13 @@ export const EVENTS: {
     date: "25-26 Jul",
     title: "Internacional de Skimboard '26 at Santa Cruz Ocean Spirit",
     location: "Santa Cruz, Portugal",
-    status: "em-breve",
+    status: "concluido",
   },
   {
     date: "07-09 Ago",
     title: "Zap World Championships of Skimboarding",
     location: "Dewey Beach, DE",
-    status: "em-breve",
+    status: "concluido",
   },
   {
     date: "22-23 Ago",
